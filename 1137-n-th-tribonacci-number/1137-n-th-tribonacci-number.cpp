@@ -1,18 +1,17 @@
 class Solution {
 public:
-    int t0=0, t1=1, t2=1;
-    long long int arr[38]={0};
+    vector<int> dp;
     int tribonacci(int n) {
-        
-        if(n==0)
-            return t0;
-        if(n==1)
-            return t1;
-        if(n==2)
-            return t2;
-        if(arr[n]!=0)
-            return arr[n];
-        return arr[n]=tribonacci(n-3)+tribonacci(n-2)+tribonacci(n-1);
+        dp.resize(n+1,-1);
+        return solve(n);
         
     }
+    
+    int solve(int n){
+        if(dp[n]!=-1) return dp[n];
+        else if(n==0) return dp[0]=0; 
+        else if(n==1 || n==2) return dp[n]=1;
+        else return dp[n]=solve(n-1)+solve(n-2)+solve(n-3);
+    }
+    
 };
