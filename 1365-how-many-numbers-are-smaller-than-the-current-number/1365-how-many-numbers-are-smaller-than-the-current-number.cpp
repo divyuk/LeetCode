@@ -1,17 +1,25 @@
 class Solution {
 public:
     vector<int> smallerNumbersThanCurrent(vector<int>& nums) {
-        vector<int>ans;
         int n = nums.size();
-        ans.reserve(n);
-        for(int i = 0;i<n;i++ ){
-            int count=0;
-            for(int j = 0 ;j<n;j++){
-                if(i!=j and nums[i]>nums[j])
-                    count++;
-            }
-            ans.push_back(count);
+        vector<int>bucket(101,0);
+        
+        for(auto i : nums)
+            bucket[i]++;
+        // Prefix sum
+        for (int i = 1; i < bucket.size(); i++)
+            bucket[i] +=bucket[i-1];
+        
+        vector<int>ans(n,0);
+        for(int i = 0;i<n;i++){
+            if(nums[i]==0)
+                ans[i]=0;
+            else
+                ans[i] = bucket[nums[i]-1];
+             
+            
         }
+
         return ans;
     }
 };
