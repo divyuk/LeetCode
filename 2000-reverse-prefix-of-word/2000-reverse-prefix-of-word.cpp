@@ -1,14 +1,20 @@
 class Solution {
 public:
-    string reversePrefix(string word, char ch) {
-        int n = word.size();
-        for (int i = 0; i < n; i++)
-        {
-            if(word[i]==ch){
-                reverse(word.begin(), word.begin()+i+1);
-                return word;
-            }
-        }
-        return word;
+ string reversePrefix(string word, char ch) {
+        
+	int pos = -1;
+	for(int i=0; i<word.size(); i++)
+	{
+		if(word[i] == ch) 
+		{
+			pos = i;
+			break;
+		}
+	}
+
+	if(pos == -1) return word;
+
+	reverse(word.begin(), word.begin() + pos + 1);
+	return word;
     }
 };
