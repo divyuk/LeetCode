@@ -6,15 +6,11 @@ public:
         int right=0,left=0;
         while (right<n)
         {
-            if(nums[right] == 0){
-                if(k!=0)
-                    k--; // decrease the k
-                else
-                    while(nums[left++] != 0);
-            }
-            ans=max(ans,right-left+1);
+            if(nums[right] == 0) k--;
+            if(k<0 and nums[left++] == 0) k++;
             right++;
         }
-        return ans;
+      
+        return right-left;
     }
 };
