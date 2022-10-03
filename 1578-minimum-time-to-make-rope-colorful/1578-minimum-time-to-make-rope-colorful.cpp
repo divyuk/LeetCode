@@ -1,18 +1,19 @@
 class Solution {
 public:
-    int minCost(string colors, vector<int>& neededTime) {
-        int n = colors.size();
-        int ans=0,k=0;
-        for(int i=0;i<n;i++){
-            if(colors[i] == colors[i+1]){
-                k = neededTime[i]<neededTime[i+1]?i:i+1;
-                ans+=neededTime[k];
-                if(k!=0){
-                    colors[k] = colors[k-1];
-                    neededTime[k] = neededTime[k-1];
-                }
-            }
+    int minCost(string s, vector<int>& cost) 
+    {
+        int res = 0;
+        int n = s.size();
+        for(int i = 1; i < n; i++)
+        {
+            if(s[i] == s[i - 1])
+            {
+                res += min(cost[i], cost[i - 1]); 
+                cost[i] = max(cost[i], cost[i - 1]); 
+            }     
         }
-        return ans;
+        
+        return res;
+        
     }
 };
