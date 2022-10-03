@@ -3,7 +3,7 @@ public:
     int minCost(string colors, vector<int>& neededTime) {
         int n = colors.size();
         int ans=0,k=0;
-        for(int i=0,j=1;j<n;i++,j++){
+        for(int i=0;i<n;i++){
             if(colors[i] == colors[i+1]){
                 k = neededTime[i]<neededTime[i+1]?i:i+1;
                 ans+=neededTime[k];
