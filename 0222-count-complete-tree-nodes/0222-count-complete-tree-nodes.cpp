@@ -29,7 +29,29 @@ public:
     }
     
     int countNodes(TreeNode* root) {
-        preorder(root);
-        return c-1;
+        // preorder(root);
+        // return c-1;
+        
+        
+        if(root==NULL)
+            return 0;
+        
+        int left_part =1;
+        int right_part  = 1;
+        
+        TreeNode *l = root->left;
+        TreeNode *r = root->right;
+        while(l){
+            left_part++;
+            l = l ->left;
+        }
+        
+        while(r){
+            right_part++;
+            r = r->right;
+        }
+        if(left_part==right_part)
+            return pow(2,left_part) -1;
+        return 1 + countNodes(root->left) + countNodes(root->right);
     }
 };
