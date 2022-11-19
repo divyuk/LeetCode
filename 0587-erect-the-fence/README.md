@@ -7,15 +7,15 @@
 <p>&nbsp;</p>
 <p><strong class="example">Example 1:</strong></p>
 <img alt="" src="https://assets.leetcode.com/uploads/2021/04/24/erect2-plane.jpg" style="width: 509px; height: 500px;">
-<pre style="position: relative;"><strong>Input:</strong> points = [[1,1],[2,2],[2,0],[2,4],[3,3],[4,2]]
+<pre><strong>Input:</strong> points = [[1,1],[2,2],[2,0],[2,4],[3,3],[4,2]]
 <strong>Output:</strong> [[1,1],[2,0],[3,3],[2,4],[4,2]]
-<div class="open_grepper_editor" title="Edit &amp; Save To Grepper"></div></pre>
+</pre>
 
 <p><strong class="example">Example 2:</strong></p>
 <img alt="" src="https://assets.leetcode.com/uploads/2021/04/24/erect1-plane.jpg" style="width: 509px; height: 500px;">
-<pre style="position: relative;"><strong>Input:</strong> points = [[1,2],[2,2],[4,2]]
+<pre><strong>Input:</strong> points = [[1,2],[2,2],[4,2]]
 <strong>Output:</strong> [[4,2],[2,2],[1,2]]
-<div class="open_grepper_editor" title="Edit &amp; Save To Grepper"></div></pre>
+</pre>
 
 <p>&nbsp;</p>
 <p><strong>Constraints:</strong></p>
