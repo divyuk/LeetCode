@@ -6,8 +6,7 @@ bool wordPattern(string pattern, string s) {
     istringstream in(s);
     int i = 0;
     for (string word; in >> word; ++i) {
-        if (i == pattern.size())
-            return false;
+ 
         char c = pattern[i];
         if (!m.count(c) && !m2.count(word)) {
             m[c] = word;
