@@ -3,15 +3,11 @@ public:
     int missingNumber(vector<int>& nums) {
         
         int n = nums.size();
-        vector<int>h(n+1,0);
-        
-        for(int i = 0;i<n;i++){
-            h[nums[i]]++;
+        int res = nums.size();
+        for(int i=0; i<nums.size(); i++){
+            res ^= i;
+            res ^= nums[i];
         }
-        
-        for(int i = 0;i<n;i++)
-            if(h[i] ==0)
-                return i;
-        return n;
+        return res;
     }
 };
