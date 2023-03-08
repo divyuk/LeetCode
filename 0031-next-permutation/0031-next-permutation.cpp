@@ -1,29 +1,22 @@
 class Solution {
 public:
     void nextPermutation(vector<int>& nums) {
-        // next_permutation(nums.begin(),nums.end());
-        int idx = -1;
-        for(int i = nums.size()-1 ; i>0 ; i--){
-            if (nums[i]>nums[i-1]){
-                idx = i;
+        int n = nums.size(), k, l;
+    	for (k = n - 2; k >= 0; k--) {
+            if (nums[k] < nums[k + 1]) {
                 break;
             }
         }
-        if(idx==-1)
-            reverse(nums.begin() , nums.end());
-        else{
-            int m = 100000;int k =idx;
-            for(int j = idx+1 ; j<nums.size() ; j++){
-                if(nums[idx-1]<nums[j] ){
-                    m = min(m , nums[j]);
-                    k = j;
+    	if (k < 0) {
+    	    reverse(nums.begin(), nums.end());
+    	} else {
+    	    for (l = n - 1; l > k; l--) {
+                if (nums[l] > nums[k]) {
+                    break;
                 }
-            }
-            swap(nums[k] , nums[idx-1]);
-            reverse(nums.begin()+idx , nums.end());
+            } 
+    	    swap(nums[k], nums[l]);
+    	    reverse(nums.begin() + k + 1, nums.end());
         }
-        
     }
 };
-
-
