@@ -11,24 +11,64 @@
 class Solution {
 public:
     ListNode* addTwoNumbers(ListNode* l1, ListNode* l2) {
-                int carry =0;
-        ListNode* ans = new ListNode(0);
-        ListNode *p = l1 , *q = l2 , *curr = ans;
-        while(p || q){
-            int x = (p)?p->val:0;
-            int y = (q)?q->val:0;
-            int sum = carry + x + y;
-            carry = sum/10;
-            curr->next  = new ListNode(sum%10);
-            curr = curr->next;
-            if(p)
-                p=p->next;
-            if(q)
-                q=q->next;
+        ListNode* h = new ListNode();
+        ListNode*head=h;
+        ListNode* p1 = l1;
+        ListNode* p2 = l2;
+        int sum=0;
+        int carry =0;
+        while(p1!=NULL and p2!=NULL){
+            sum=p1->val + p2->val+carry; 
+            carry=sum/10;
+            sum=sum%10;
+            h->val=sum;
+            h->next=new ListNode();
+            h = h->next;
+            p1=p1->next;
+            p2=p2->next;
+            sum=0;
         }
-        if(carry)
-            curr->next = new ListNode(carry);
-        return ans->next;
+        // cout<<carry;
+        while(p1!=NULL){
+            sum = p1->val+carry;
+            carry = sum/10;
+            sum = sum%10;
+           
+            
+            
+            // cout<<carry<<"\n";
+            h->val=sum;
+            h->next=new ListNode();
+            h = h->next;
+            p1=p1->next;    
+            sum=0;
+        }
+        while(p2!=NULL){
+            sum = p2->val+carry;
+            carry = sum/10;
+            sum = sum%10;
+            h->val=sum;
+            h->next=new ListNode();
+            h = h->next;
+            p2=p2->next; 
+            sum=0;
+        }
+        cout<<carry;
+        if(carry){
+            h->val=carry;
+            h->next=NULL;
+        }
+        else{
+        ListNode* k = head->next;
+        ListNode*  prev = head;
+        
+        while(k->next!=NULL){
+            prev=k;
+            k=k->next;
+        
+        }
+        prev->next=NULL;
+        }
+        return head;
     }
-    
 };
