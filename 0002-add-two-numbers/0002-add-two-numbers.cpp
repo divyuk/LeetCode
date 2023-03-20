@@ -1,33 +1,52 @@
-/**
- * Definition for singly-linked list.
- * struct ListNode {
- *     int val;
- *     ListNode *next;
- *     ListNode() : val(0), next(nullptr) {}
- *     ListNode(int x) : val(x), next(nullptr) {}
- *     ListNode(int x, ListNode *next) : val(x), next(next) {}
- * };
- */
 class Solution {
 public:
     ListNode* addTwoNumbers(ListNode* l1, ListNode* l2) {
-        int carry =0;
-        ListNode* ans = new ListNode(0);
-        ListNode *p = l1 , *q = l2 , *curr = ans;
-        while(p || q){
-            int x = (p)?p->val:0;
-            int y = (q)?q->val:0;
-            int sum = carry + x + y;
-            carry = sum/10;
-            curr->next  = new ListNode(sum%10);
-            curr = curr->next;
-            if(p)
-                p=p->next;
-            if(q)
-                q=q->next;
+        ListNode* curr=l1;
+        int carry=0;
+        ListNode* node = new ListNode();
+        ListNode* head = node;
+        while(l1 and l2){
+
+            int sum = l1->val+l2->val+carry;
+            int s = sum%10;
+            carry=sum/10;
+            node->val = s;
+            node->next = new ListNode();
+            l1=l1->next;
+            l2=l2->next;
+            node=node->next;
         }
-        if(carry)
-            curr->next = new ListNode(carry);
-        return ans->next;
+
+        while(l1){
+            int sum = l1->val+0+carry;
+            int s = sum%10;
+            carry=sum/10;
+            node->val = s;
+            node->next = new ListNode();
+            l1=l1->next;
+            node=node->next;
+        }
+        while(l2){
+            int sum = l2->val+0+carry;
+            int s = sum%10;
+            carry=sum/10;
+            node->val = s;
+            node->next = new ListNode();
+            l2=l2->next;
+            node=node->next;
+        }
+        if(carry){
+            node->val = carry;
+            node->next = new ListNode();
+            node=node->next;
+        }
+        ListNode *r = NULL;
+        ListNode *k = head;
+        while(k->next){
+            r=k;
+            k=k->next;
+        }
+        r->next = NULL;
+        return head;
     }
 };
