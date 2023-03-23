@@ -7,6 +7,8 @@ public:
             if(nums[i]+i>=goal)
                 goal = i;
             }
-        return true ? !goal : false;
+        // return true ? !goal : false;
+        
+        return !goal;
     }
 };
