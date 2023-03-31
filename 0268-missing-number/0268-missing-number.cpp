@@ -5,8 +5,7 @@ public:
         int n = nums.size();
         int res = nums.size();
         for(int i=0; i<nums.size(); i++){
-            res ^= i;
-            res ^= nums[i];
+            res = res ^  i ^ nums[i];
         }
         return res;
     }
