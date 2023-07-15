@@ -6,9 +6,15 @@ public:
         
         for(auto i : nums)
             bucket[i]++;
+        
+        // for(int i = 0;i<9;i++)
+        //     cout<<bucket[i]<<" ";
         // Prefix sum
         for (int i = 1; i < bucket.size(); i++)
             bucket[i] +=bucket[i-1];
+        
+        for(int i = 0;i<9;i++)
+            cout<<bucket[i]<<" ";
         
         vector<int>ans(n,0);
         for(int i = 0;i<n;i++){
