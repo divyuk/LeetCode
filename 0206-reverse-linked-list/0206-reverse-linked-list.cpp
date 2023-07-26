@@ -11,9 +11,9 @@
 class Solution
 {
 public:
-    ListNode *reverseList(ListNode *head){
-
-        if(head==NULL)
+    ListNode *reverseList(ListNode *head)
+    {
+        if (head == NULL)
             return NULL;
         ListNode *r = NULL;
         ListNode *p = head;
@@ -26,8 +26,6 @@ public:
             q = q->next;
         }
         p->next = r;
-        head = p;
-        return head;
-        
+        return p;
     }
 };
