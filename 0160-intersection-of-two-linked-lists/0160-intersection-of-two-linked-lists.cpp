@@ -11,11 +11,14 @@ public:
     ListNode *getIntersectionNode(ListNode *headA, ListNode *headB) {
         while(headA){
             
-            ListNode *temp = headB;
-            while(temp){
-                if(headA == temp) return headA;
-            temp=temp->next;
+            ListNode* checker  = headB; // address of headB
+            
+            while(checker){
+                if(checker == headA) return checker;
+            checker=checker->next;
             }
+            
+            
             headA=headA->next;
         }
         return NULL;
