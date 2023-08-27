@@ -9,18 +9,20 @@
 class Solution {
 public:
     ListNode *getIntersectionNode(ListNode *headA, ListNode *headB) {
+        unordered_set<ListNode* > uset;
+        
+        //Filling in set
+        
         while(headA){
-            
-            ListNode* checker  = headB; // address of headB
-            
-            while(checker){
-                if(checker == headA) return checker;
-            checker=checker->next;
-            }
-            
-            
+            uset.insert(headA);
             headA=headA->next;
         }
+        
+        while(headB){
+            if(uset.find(headB)!=uset.end()) return headB;
+            headB=headB->next;
+        }
+        
         return NULL;
     }
 };
