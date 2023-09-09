@@ -39,8 +39,8 @@ public:
             while (difference-- != 0)
                 headA = headA->next;
 
-        while (abs(difference) == 0)
-            headA = headA->next;
+//         while (abs(difference) == 0)
+//             headA = headA->next;
 
         //! Running them together
         while (headA)
