@@ -11,21 +11,28 @@ class Solution
     int maxMeetings(int start[], int end[], int n)
     {
         // Your code here
-        vector<pair<int,int>>p;
-        for(int i =0 ; i<n;i++)
-            p.push_back({ end[i] , start[i]});
         
-        sort(p.begin(),p.end());
-        int cnt=1;
-        int s = p[0].first;
+        vector<pair<int,int>> meetings(n);
+        for(int i =0  ; i<n ; i++){
+            meetings[i].first = end[i];
+            meetings[i].second = start[i];
+        }
+        // 1. Sort based on the ending time as in future we will have more number of chances to watch movies
+        sort(meetings.begin() , meetings.end());
 
-        for(int i = 1; i<n ; ++i){
-            if(p[i].second>s){
-                s = p[i].first;
-                cnt++;
+        // 2. Compared with the arrival of next movie so that to know if we can watch that movie or not.
+        int numberOfMeetings =1 ;
+        int endingMeeting = meetings[0].first;
+        for(int i =1  ; i<n ; i++){
+            if(endingMeeting < meetings[i].second ){
+                endingMeeting = meetings[i].first;
+                numberOfMeetings++;
+                
             }
         }
-        return cnt;
+        
+        return numberOfMeetings;
+        
     }
 };
 
