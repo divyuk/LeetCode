@@ -6,24 +6,24 @@ Consider that all the trains arrive on the same day and leave on the same day. A
 <p><br>
 <span style="font-size:18px"><strong>Example 1:</strong></span></p>
 
-<pre style="position: relative;"><span style="font-size:18px"><strong>Input</strong>: n = 6&nbsp;
+<pre><span style="font-size:18px"><strong>Input</strong>: n = 6&nbsp;
 arr[] = {0900, 0940, 0950, 1100, 1500, 1800}
 dep[] = {0910, 1200, 1120, 1130, 1900, 2000}
 <strong>Output</strong>: 3
 <strong>Explanation</strong>: 
 Minimum 3 platforms are required to 
-safely arrive and depart all trains.</span><div class="open_grepper_editor" title="Edit &amp; Save To Grepper"></div></pre>
+safely arrive and depart all trains.</span></pre>
 
 <p><span style="font-size:18px"><strong>Example 2:</strong></span></p>
 
-<pre style="position: relative;"><span style="font-size:18px"><strong>Input</strong>: n = 3
+<pre><span style="font-size:18px"><strong>Input</strong>: n = 3
 arr[] = {0900, 1100, 1235}
 dep[] = {1000, 1200, 1240}
 <strong>Output</strong>: 1
 <strong>Explanation</strong>: Only&nbsp;1 platform is required to 
 safely manage the arrival and departure 
 of all trains.&nbsp;</span>
-<div class="open_grepper_editor" title="Edit &amp; Save To Grepper"></div></pre>
+</pre>
 
 <p><br>
 <span style="font-size:18px"><strong>Your Task:</strong><br>
