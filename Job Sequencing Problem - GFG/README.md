@@ -11,7 +11,7 @@
 <p><br>
 <strong><span style="font-size:18px">Example 1:</span></strong></p>
 
-<pre style="position: relative;"><strong><span style="font-size:18px">Input:
+<pre><strong><span style="font-size:18px">Input:
 </span></strong><span style="font-size:18px">N = 4
 Jobs = {(1,4,20),(2,1,10),(3,1,40),(4,1,30)}
 <strong>Output:
@@ -19,11 +19,11 @@ Jobs = {(1,4,20),(2,1,10),(3,1,40),(4,1,30)}
 Explanation:
 </strong>Job<sub>1</sub>&nbsp;and Job<sub>3 </sub>can be done with
 maximum profit of 60 (20+40).</span>
-<div class="open_grepper_editor" title="Edit &amp; Save To Grepper"></div></pre>
+</pre>
 
 <p><strong><span style="font-size:18px">Example 2:</span></strong></p>
 
-<pre style="position: relative;"><strong><span style="font-size:18px">Input:
+<pre><strong><span style="font-size:18px">Input:
 </span></strong><span style="font-size:18px">N = 5
 Jobs = {(1,2,100),(2,1,19),(3,2,27),
 &nbsp;       (4,1,25),(5,1,15)}
@@ -31,7 +31,7 @@ Jobs = {(1,2,100),(2,1,19),(3,2,27),
 </strong>2 127<strong>
 Explanation:
 </strong>2 jobs can be done with
-maximum profit of 127 (100+27).</span><div class="open_grepper_editor" title="Edit &amp; Save To Grepper"></div></pre>
+maximum profit of 127 (100+27).</span></pre>
 
 <p><br>
 <span style="font-size:18px"><strong>Your Task</strong> :<br>
