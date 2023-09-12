@@ -12,29 +12,25 @@ class Solution{
     //railway station such that no train waits.
     int findPlatform(int arr[], int dep[], int n)
     {
-        vector<pair<int,int>>trains;
-        for(int i=0;i<n;++i)
-            trains.push_back({arr[i], dep[i]});
-            
-        
-        sort(trains.begin() , trains.end());
-        priority_queue<int, vector<int>, greater<int>> trainChart;
-        
-        trainChart.push(trains[0].second);
-        
-        int platforms = 1;
-        
-        for(int i =1;i<n;++i){
-            
-            if(trainChart.top() >= trains[i].first )
-                platforms++;
-            else
-                trainChart.pop();
-            
-            trainChart.push(trains[i].second);
-        }
-        
-        return platforms;
+    	int arrivalPointer = 1;
+    	int departurePointer = 0;
+    	
+    	sort(arr, arr+n);
+    	sort(dep, dep+n);
+    	int platform = 1;
+    	while(arrivalPointer < n){
+    	    
+    	    if(arr[arrivalPointer] <= dep[departurePointer]){
+    	        platform++;
+    	    }
+    	    else
+    	        departurePointer++;
+    	    
+    	    arrivalPointer++;
+    	    
+    	}
+    	
+    	return platform;
     }
 };
 
