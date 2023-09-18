@@ -1,23 +1,16 @@
 class Solution {
 public:
     vector<int> kWeakestRows(vector<vector<int>>& mat, int k) {
-        multimap<int,int>ans;
-        int r=0;
-        for(auto i : mat){
-            int cnt =0;
-            for(int j =0 ;j<i.size() ;j++)
-                if(i[j]==1) cnt++;
-           ans.insert({cnt, r});
-           r++;
-        }        
-        vector<int>res;
-        int i =0;
-        for(auto it : ans){
-            if(k==0) break;
-            res.push_back(it.second);
-            k--;
+        vector<vector<int>>temp(mat.size() , vector<int>(2,0));
+        for(int i =0; i<mat.size() ; i++){
+            int sum = accumulate(mat[i].begin() , mat[i].end() ,0);
+            temp[i][0] = sum;
+            temp[i][1] = i;
         }
-        
-        return res;
+        sort(temp.begin() , temp.end());
+        vector<int>ans;
+        for(int i =0;i<k;i++)
+            ans.push_back(temp[i][1]);
+        return ans;
     }
 };
