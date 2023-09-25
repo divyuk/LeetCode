@@ -24,17 +24,9 @@ void __f(const char *names, Arg1 &&arg1, Args &&...args)
 class Solution {
 public:
     char findTheDifference(string s, string t) {
-        vector<int>arr(26,0);
-        repI(i ,0,s.size()){
-            arr[s[i] -'a' ]++;
-        }
-        
-        repI(i ,0,t.size()){
-            arr[t[i] -'a' ]--;
-        }
-        repI(i ,0,26){
-             if(arr[i] == -1) return static_cast<char>('a' + i);
-        }
-        return '\0';
+        char c = 0;
+        for(auto i : s) c^=i;
+        for(auto i : t) c^=i;
+        return c;
     }
 };
