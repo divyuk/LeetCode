@@ -1,26 +1,26 @@
 class Solution {
 public:
     bool validPath(int n, vector<vector<int>>& edges, int source, int destination) {
-        vector<int>adj[n];
-        for(int i =0;i<edges.size();i++){
-            int u = edges[i][0];
-            int v = edges[i][1];
+        vector<bool>visited(n,false);
+        // Converting it into adjancy list
+        vector<int>adj_list[n];
+        for(int j =0; j<edges.size(); j++){
+            int u = edges[j][0];
+            int v = edges[j][1];
+            adj_list[u].push_back(v);
+            adj_list[v].push_back(u);
             
-            adj[u].push_back(v);
-            adj[v].push_back(u);
         }
-        
         queue<int>q;
-        vector<bool>visited(n+1,false);
         q.push(source);
         visited[source] = true;
         while(!q.empty()){
-            int src = q.front();
+            int u = q.front();
             q.pop();
-            for(auto i : adj[src]){
-                if(!visited[i]){
-                    visited[i]=true;
-                    q.push(i);
+            for(int v : adj_list[u]){
+                if(!visited[v]){
+                    q.push(v);
+                    visited[v] = true;
                 }
             }
         }
