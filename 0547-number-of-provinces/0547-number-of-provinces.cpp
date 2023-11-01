@@ -2,12 +2,22 @@ class Solution {
 public:
     int findCircleNum(vector<vector<int>>& isConnected) {
         int n = isConnected.size();
+        vector<vector<int>> adjList(n);
+
+        for (int i = 0; i < n; ++i) {
+            for (int j = 0; j < n; ++j) {
+                if (isConnected[i][j] == 1) {
+                    adjList[i].push_back(j);
+                }
+            }
+        }
+
         vector<bool> visited(n, false);
         int provinces = 0;
 
         for (int i = 0; i < n; ++i) {
             if (!visited[i]) {
-                dfs(isConnected, visited, i);
+                dfs(adjList, visited, i);
                 provinces++;
             }
         }
@@ -15,11 +25,11 @@ public:
         return provinces;
     }
 
-    void dfs(vector<vector<int>>& isConnected, vector<bool>& visited, int city) {
+    void dfs(vector<vector<int>>& adjList, vector<bool>& visited, int city) {
         visited[city] = true;
-        for (int i = 0; i < isConnected.size(); ++i) {
-            if (isConnected[city][i] == 1 && !visited[i]) {
-                dfs(isConnected, visited, i);
+        for (int neighbor : adjList[city]) {
+            if (!visited[neighbor]) {
+                dfs(adjList, visited, neighbor);
             }
         }
     }
