@@ -1,44 +1,34 @@
-/**
- * Definition for singly-linked list.
- * struct ListNode {
- *     int val;
- *     ListNode *next;
- *     ListNode() : val(0), next(nullptr) {}
- *     ListNode(int x) : val(x), next(nullptr) {}
- *     ListNode(int x, ListNode *next) : val(x), next(next) {}
- * };
- */
-class Solution {
+class Solution 
+{
 public:
-    ListNode* reverseKGroup(ListNode* head, int k) {
-        if(head== NULL || k==1) return head;
+    
+    ListNode* reverse(ListNode* first, ListNode* last)
+    {
+        ListNode* prev = last;
         
-        int count =0;
-        ListNode* dummyHead = new ListNode();
-        dummyHead->next= head;
-        ListNode* prev = dummyHead;
-        ListNode* curr;
-        ListNode* nex;
-        
-        while(head){
-            count++;
-            head=head->next;
+        while ( first != last )
+        {
+            auto tmp = first->next;
+            first->next = prev;
+            prev = first;
+            first = tmp;
         }
         
-        while(count>=k){
-            
-            curr = prev->next;
-            nex=curr->next;
-            for(int i=1;i<k;i++){
-                curr->next= nex->next;
-                nex->next=prev->next;
-                prev->next = nex;
-                nex=curr->next;
-            }
-            prev=curr;
-            count-=k;
+        return prev;
+    }
+    
+    ListNode* reverseKGroup(ListNode* head, int k) 
+    {
+        auto node=head;
+        for (int i=0; i < k; ++i)
+        {
+            if ( ! node  )
+                return head; // nothing to do list too sort
+            node = node->next;
         }
-        return dummyHead->next;
-        
+
+        auto new_head = reverse( head, node);
+        head->next = reverseKGroup( node, k);
+        return new_head;
     }
 };
