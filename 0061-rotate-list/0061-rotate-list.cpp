@@ -23,10 +23,9 @@ ListNode* rotateRight(ListNode* head, int k) {
     }
 
     int distance = size - k % size;
-    if (distance == size) {
-        // No rotation needed
+    if (distance == size) // No rotation needed
         return head;
-    }
+    
 
     // Find the new head and the new tail
     ListNode* newHead = head;
