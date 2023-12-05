@@ -2,7 +2,7 @@ class Solution {
 public:
     vector<vector<int>>ans;
     
-    void fun(int index , vector<int>nums){
+    void fun(int index , vector<int>&nums){
         if(index==nums.size()){
             ans.push_back(nums);
             return;
