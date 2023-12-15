@@ -1,18 +1,20 @@
+#include <vector>
+#include <unordered_set>
+#include <string>
+
 class Solution {
 public:
     string destCity(vector<vector<string>>& paths) {
-        unordered_map<string,int>umap;
-        int n = paths.size();
-        for(int i = 0 ; i< n ;i++){
-            string go = paths[i][0];
-            string dest = paths[i][1];
-            umap[go]--;
-            umap[dest]++;
-        }
-        for(auto it : umap)
-            if(it.second>0) return it.first;
+       unordered_set<string> destinations;
         
-    return "";
+        for(const auto& path : paths) {
+            destinations.insert(path[1]);
+        }
+        
+        for(const auto& path : paths) {
+            destinations.erase(path[0]);
+        }
+        
+        return *destinations.begin();
     }
-    
 };
