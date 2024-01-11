@@ -1,37 +1,20 @@
-/**
- * Definition for a binary tree node.
- * struct TreeNode {
- *     int val;
- *     TreeNode *left;
- *     TreeNode *right;
- *     TreeNode() : val(0), left(nullptr), right(nullptr) {}
- *     TreeNode(int x) : val(x), left(nullptr), right(nullptr) {}
- *     TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) {}
- * };
- */
+
 class Solution {
 public:
-    int maxD=0;
-    
-    void performCalc(TreeNode* root, TreeNode* child){
-        if(root==NULL or child==NULL) return;
-        maxD = max(maxD  , abs(root->val - child->val) );
-        performCalc(root, child->left);
-        performCalc(root , child->right);
-    }
-    
-    void mainFun(TreeNode* root){
-        if(root==NULL) return;
-        performCalc(root, root->left);
-        performCalc(root, root->right);
+    int func(TreeNode* root , int maxv, int minv){
+        if(!root) return abs(maxv-minv);
+        maxv = max(maxv , root->val);
+        minv = min(minv, root->val);
         
-        mainFun(root->left);
-        mainFun(root->right);
+        int l = func(root->left, maxv, minv);
+        int r = func(root->right, maxv, minv);
+        
+        return max(l,r);
     }
-    
     
     int maxAncestorDiff(TreeNode* root) {
-        mainFun(root);
-        return maxD;
+        int maxv=root->val,minv=root->val;
+        int ans = func(root, maxv , minv );
+        return ans;
     }
 };
