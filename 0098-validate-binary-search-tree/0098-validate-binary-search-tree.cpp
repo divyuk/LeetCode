@@ -13,7 +13,7 @@ class Solution {
 public:
     bool check(TreeNode* root , long min , long max){
         if(!root) return 1;
-        if( (root->val <=min or root->val >=max ) ) return 0;
+        if( !(root->val <max and root->val>min  ) ) return 0;
         return (check(root->left, min , root->val ) and 
                 check(root->right , root->val , max ));
     }
