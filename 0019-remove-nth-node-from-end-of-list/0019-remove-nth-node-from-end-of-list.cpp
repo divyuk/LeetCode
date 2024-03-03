@@ -17,7 +17,7 @@ public:
         
         while(n--)
             fast = fast->next;
-        
+  
         if(fast == NULL) return head->next;
         while(fast->next){
             slow=slow->next;
