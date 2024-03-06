@@ -6,20 +6,18 @@
  *     ListNode(int x) : val(x), next(NULL) {}
  * };
  */
-class Solution
-{
+class Solution {
 public:
-    bool hasCycle(ListNode *head)
-    {
-        ListNode *slow = head;
-        ListNode *fast = head;
-        while (fast and fast->next)
-        {
-            slow = slow->next;
-            fast = fast->next->next;
-            if (slow == fast)
-                return 1;
+    bool hasCycle(ListNode *head) {
+        if(head == NULL or head->next == NULL) return false;
+        ListNode* slow = head;
+        ListNode* fast = head->next;
+        while(fast and fast->next){
+            slow=slow->next;
+            fast=fast->next->next;
+           
+            if(slow==fast) return true;
         }
-        return 0;
+        return false;
     }
 };
