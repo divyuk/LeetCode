@@ -1,31 +1,19 @@
 class Solution {
 public:
     string customSortString(string order, string s) {
-        unordered_map<char , int> umap;
-        
-        for(int i =0; i< s.size() ; i++) umap[s[i]]++;
-        string customWord="";
-        for(int i : order){
-            if(umap.find(i) != umap.end() ){
-                while(umap[i] != 0){
-                customWord+=i;
-                umap[i]--;
-                }
-            }
-            
+        string result = "";
+        unordered_map<int,int>mp;
+        for(auto &it : s){
+            mp[it]++;
         }
-        cout<<customWord<<"\n";
-        for( auto it : umap){
-            if(it.second>0){
-                while(it.second!=0){
-                    customWord+=it.first;
-                    it.second--;
-                }
-            }
-                
+        for(auto &it : order){
+            if(mp.find(it) != mp.end())
+                result.append(mp[it], it);
+                mp.erase(it);
         }
-            
-            
-        return customWord;
+        for(auto &it : mp){
+            result.append(it.second,it.first);
+        }
+        return result;
     }
 };
