@@ -1,23 +1,44 @@
-
+/**
+ * Definition for singly-linked list.
+ * struct ListNode {
+ *     int val;
+ *     ListNode *next;
+ *     ListNode() : val(0), next(nullptr) {}
+ *     ListNode(int x) : val(x), next(nullptr) {}
+ *     ListNode(int x, ListNode *next) : val(x), next(next) {}
+ * };
+ */
 class Solution {
 public:
     ListNode* removeZeroSumSublists(ListNode* head) {
-        ListNode* dummy = new ListNode(0);
-        dummy->next = head;
+        ListNode* dummyNode = new ListNode(0);
+        dummyNode->next = head;
+        unordered_map<int, ListNode*> umap;
+        umap[0] = dummyNode;
+        int prefixSum=0;
+        
+        while(head){
+            prefixSum += head->val;
+            
+            if(umap.find(prefixSum) != umap.end()){
+                // if the sum is there that means you need delete the amount of node
+                //.. starting from 
+                
+                ListNode* sumFounded = umap[prefixSum];
+                ListNode* temp = sumFounded;
+                int sum = prefixSum;
+                while(temp!=head){
+                    temp=temp->next;
+                    sum+=temp->val;
+                    if(temp!=head) umap.erase(sum);
+                }
+                sumFounded->next = head->next;
+            }
+            else umap[prefixSum] = head;
 
-        unordered_map<int, ListNode*> sums;
-        int sum = 0;
-        for (ListNode* current = dummy; current != nullptr; current = current->next) {
-            sum += current->val;
-            sums[sum] = current;
+            head=head->next;
         }
-
-        sum = 0;
-        for (ListNode* current = dummy; current != nullptr; current = current->next) {
-            sum += current->val;
-            current->next = sums[sum]->next;
-        }
-
-        return dummy->next;
+        
+        return dummyNode->next;
     }
 };
