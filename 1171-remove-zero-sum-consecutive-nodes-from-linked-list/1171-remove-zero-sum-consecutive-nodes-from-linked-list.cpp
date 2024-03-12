@@ -30,7 +30,7 @@ public:
                 while(temp!=head){
                     temp=temp->next;
                     sum+=temp->val;
-                    if(temp!=head) umap.erase(sum);
+                    if(temp!=head) umap.erase(sum); // why this condition check for  [0,0]
                 }
                 sumFounded->next = head->next;
             }
