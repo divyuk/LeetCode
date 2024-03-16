@@ -8,16 +8,16 @@ public:
         
         for(int i = 0; i< n ; i++){
             
-            if(nums[i] == 0) sum-=1;
-            else sum+=1;
+            sum += nums[i]==0 ? -1 : 1;
+            
+            // if(nums[i] == 0) sum-=1;
+            // else sum+=1;
             
             if(sum==0) ans = i+1;
-            else if(umap.find(sum) == umap.end()){
-                umap[sum] = i;
-            }
-            else{
-                ans = max(ans , i- umap[sum]);
-            }
+            
+            else if(umap.find(sum) == umap.end()) umap[sum] = i;
+            
+            else ans = max(ans , i- umap[sum]);
         }
         
         return ans;
