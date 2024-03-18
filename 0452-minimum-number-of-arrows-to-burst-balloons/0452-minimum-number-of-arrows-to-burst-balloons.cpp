@@ -4,9 +4,7 @@ public:
         if (points.empty()) return 0;
 
         int arrows = 1;
-        sort(points.begin(), points.end(), [](const vector<int>& a, const vector<int>& b) {
-            return a[0] < b[0];
-        });
+        sort(points.begin(), points.end());
 
         int firstBalloon = points[0][1];
 
