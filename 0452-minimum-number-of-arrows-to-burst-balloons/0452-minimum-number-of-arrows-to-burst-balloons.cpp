@@ -1,30 +1,27 @@
 class Solution {
 public:
     int findMinArrowShots(vector<vector<int>>& points) {
-        int arrows=1;
-        
-        sort(points.begin() , points.end());
-        
-        vector<int>prev = points[0];
-        
-        for(int i =1;i<points.size() ;i++ ){
-            int currentStartingPoint = points[i][0];
-            int currentEndingPoint = points[i][1];
-            
-            int previousStartingPoint = prev[0];
-            int previousEndingPoint = prev[1];
-            
-            if(currentStartingPoint > previousEndingPoint ){
+        if (points.empty()) return 0;
+
+        int arrows = 1;
+        sort(points.begin(), points.end(), [](const vector<int>& a, const vector<int>& b) {
+            return a[0] < b[0];
+        });
+
+        int firstBalloon = points[0][1];
+
+        for (int i = 1; i < points.size(); i++) {
+            int secondBalloon = points[i][0];
+            if (secondBalloon <= firstBalloon) {
+                // Update to the end of the current balloon
+                firstBalloon = min(firstBalloon, points[i][1]);
+            } else {
+                // New arrow needed, update to the end of the current balloon
                 arrows++;
-                prev = points[i];
+                firstBalloon = points[i][1];
             }
-            else{
-                prev[0] = max(previousStartingPoint,currentStartingPoint);
-                prev[1] = min(currentEndingPoint,previousEndingPoint );
-            }
-            
         }
-        
+
         return arrows;
     }
 };
