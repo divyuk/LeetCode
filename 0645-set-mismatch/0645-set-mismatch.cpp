@@ -1,8 +1,7 @@
 class Solution {
 public:
     vector<int> findErrorNums(vector<int>& nums) {
-     std::vector<int> result(2, 0);
-    std::unordered_set<int> numSet;
+    unordered_set<int> numSet;
     int n = nums.size();
 
     int duplicate = -1, missing = -1;
@@ -24,10 +23,8 @@ public:
         }
     }
 
-    result[0] = duplicate;
-    result[1] = missing;
     
-    return result;
+    return {duplicate, missing };
   
     }
 };
