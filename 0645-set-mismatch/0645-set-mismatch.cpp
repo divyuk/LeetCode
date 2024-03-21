@@ -1,26 +1,33 @@
 class Solution {
 public:
     vector<int> findErrorNums(vector<int>& nums) {
-        int len = nums.size(), dup, mis;
-        for ( int index = 0; index < len; ++index )
-        {
-            if ( nums[abs(nums[index]) - 1] < 0 ){
-                dup = abs(nums[index]);
-                cout << dup<<"  "<< index<<"\n";
-            }
-            else nums[abs(nums[index]) - 1] *= -1;
+     std::vector<int> result(2, 0);
+    std::unordered_set<int> numSet;
+    int n = nums.size();
+
+    int duplicate = -1, missing = -1;
+    
+    // Find the duplicate number
+    for (int i = 0; i < n; i++) {
+        if (numSet.find(nums[i]) != numSet.end()) {
+            duplicate = nums[i];
+        } else {
+            numSet.insert(nums[i]);
         }
-        for(auto i : nums)
-            cout << i <<" ";
-        
-        for ( int index = 0; index < len; ++index )
-        {
-            if ( nums[index] > 0 )
-            {
-                mis = index + 1;
-                break;
-            }
+    }
+    
+    // Find the missing number
+    for (int i = 1; i <= n; i++) {
+        if (numSet.find(i) == numSet.end()) {
+            missing = i;
+            break;
         }
-        return {dup, mis};
+    }
+
+    result[0] = duplicate;
+    result[1] = missing;
+    
+    return result;
+  
     }
 };
