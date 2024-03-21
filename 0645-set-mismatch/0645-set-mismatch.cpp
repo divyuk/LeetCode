@@ -8,11 +8,9 @@ public:
     
     // Find the duplicate number
     for (int i = 0; i < n; i++) {
-        if (numSet.find(nums[i]) != numSet.end()) {
-            duplicate = nums[i];
-        } else {
-            numSet.insert(nums[i]);
-        }
+        if (numSet.find(nums[i]) != numSet.end()) duplicate = nums[i];
+        else numSet.insert(nums[i]);
+        
     }
     
     // Find the missing number
