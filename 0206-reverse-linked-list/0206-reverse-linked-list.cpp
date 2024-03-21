@@ -11,18 +11,18 @@
 class Solution {
 public:
     ListNode* reverseList(ListNode* head) {
-        if (!head || !head->next) {
-            // If the list is empty or has only one element, it is already reversed
-            return head;
+        if(!head or  !head->next) return head;
+        ListNode* r = NULL;
+        ListNode* p = head;
+        ListNode* q = head->next;
+        while(q and q->next){
+            p->next =r;
+             r = p;
+             p = q;
+            q= q->next;
         }
-
-        // Recursively reverse the rest of the list
-        ListNode* reversedList = reverseList(head->next);
-
-        // Adjust the next pointer of the current node
-        head->next->next = head;
-        head->next = nullptr;
-
-        return reversedList;
+        p->next = r;
+        q->next = p;
+        return q;
     }
 };
