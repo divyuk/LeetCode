@@ -5,7 +5,7 @@ public:
         int left = 0, right = matrix[0].size();
         vector<int>spiral;
         while(left <right and top<bottom){
-            
+
             // left to right
             for(int i = left ;i<right ;i++) 
                 spiral.push_back(matrix[top][i]);
@@ -16,7 +16,7 @@ public:
                 spiral.push_back(matrix[i][right-1]);
             right--;
             
-   // ! CASE FOR ONLY ROW MATRIX OR COLUMN MATRIX
+            // ! CASE FOR ONLY ROW MATRIX OR COLUMN MATRIX
             if(left>=right or top>=bottom)
                 break;
             
