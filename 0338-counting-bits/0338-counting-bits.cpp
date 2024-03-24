@@ -1,19 +1,12 @@
 class Solution {
 public:
     vector<int> countBits(int n) {
-        vector<int>ans;
-        for(int i=0;i<=n;i++){
-            
-            int num =i;
-            
-            int c=0;
-            while(num){
-                num=(num&num-1);
-                c++;
-                cout<<num<<" ";
-            }
-            ans.emplace_back(c);  
+        vector<int>dp(n+1,0);
+        int offset =1;
+        for(int i =1;i<=n;i++){
+            if(offset*2==i) offset = i;
+            dp[i] = 1+dp[i-offset];
         }
-        return ans;
+        return dp;
     }
 };
