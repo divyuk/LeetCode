@@ -6,14 +6,11 @@ class Solution {
 public:
     bool dfs(vector<vector<char>>& board, string& word, int index, int i, int j) {
         // If we have checked all the characters of the word
-        if (index == word.length()) {
-            return true;
-        }
+        if (index == word.length()) return true;
         
         // Check if the current cell is out of bounds or doesn't match the character in the word
-        if (i < 0 || i >= board.size() || j < 0 || j >= board[0].size() || board[i][j] != word[index]) {
+        if (i < 0 || i >= board.size() || j < 0 || j >= board[0].size() || board[i][j] != word[index]) 
             return false;
-        }
         
         // Temporarily mark the current cell as visited
         char temp = board[i][j];
