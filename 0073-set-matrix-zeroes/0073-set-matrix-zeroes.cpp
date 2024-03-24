@@ -4,26 +4,27 @@ public:
     void setZeroes(vector<vector<int>>& matrix) {
         int r = matrix.size();
         int c = matrix[0].size();
-        vector<int>rowArray(r,0);
-        vector<int>colArray(c,0);
+        int col0 = 1;
         
         for(int i = 0; i<r;i++){
-            for(int j =0 ; j<c;j++){
+                if(matrix[i][0] == 0 )col0=0;
+            for(int j =1 ; j<c;j++){
                 if(matrix[i][j] == 0){
-                    rowArray[i] = 1;
-                    colArray[j] = 1;
+                    matrix[i][0] = 0;
+                    matrix[0][j] = 0;
                 }
             }
         }
         
-      for (int i = 0; i < r; i++) {
-            for (int j = 0; j < c; j++) {
-                if (rowArray[i] || colArray[j]) {
+        for(int i = r-1 ; i>=0 ; i-- ){
+            for(int j = c-1; j>=1 ; j--){
+                if(matrix[i][0] == 0 or matrix[0][j] ==0 )
                     matrix[i][j] = 0;
-                }
             }
+            if(col0==0) matrix[i][0]=0;
         }
-
 
     }
 };
+
+
