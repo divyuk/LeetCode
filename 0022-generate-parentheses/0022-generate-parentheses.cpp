@@ -1,23 +1,24 @@
 class Solution {
 public:
-    void genrate(int n , vector<string>&res,string para,int open, int close){
-        if(open == n && close == n){
-            res.push_back(para);
+    
+    void generator(int n, vector<string>&para, string p, int open, int close){
+        
+        // base case
+        if( open == n and close == n){
+            para.push_back(p);
             return;
         }
-        if(open<n){
-            genrate(n,res,para+'(',open+1,close);
-        }
-        if(close<open){
-            genrate(n,res,para+')',open,close+1);
         
-        }
+        if(open<n)
+            generator(n, para, p+'(', open+1, close);
+        if(close<open)
+            generator(n, para, p+')' , open, close+1);
     }
+    
+    
     vector<string> generateParenthesis(int n) {
-        vector<string>res;
-        string para;
-        int open=0,close=0;
-        genrate(n,res,para,open,close);
-        return res;
+        vector<string>para;
+        generator(n,para,"", 0, 0);
+        return para;
     }
 };
