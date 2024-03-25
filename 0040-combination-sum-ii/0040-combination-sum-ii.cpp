@@ -9,7 +9,7 @@ public:
 
         for (int i = start; i < nums.size(); i++) {
             // Skip duplicates
-            if (i > start && nums[i] == nums[i - 1]) continue;
+            if (i != start && nums[i] == nums[i - 1]) continue;
             if(total > target) break;
             // Include the current element in the combination
             container.push_back(nums[i]);
