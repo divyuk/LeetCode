@@ -16,18 +16,18 @@ public:
             maxFreq = max(maxFreq, entry.second);
         }
 
-        // Create a bucket to store characters based on their frequency
-        vector<vector<char>> buckets(maxFreq + 1);
+        // Create an unordered_map to store characters based on their frequency
+        unordered_map<int, string> buckets;
 
         // Place characters into the corresponding bucket based on their frequency
         for (const auto& entry : count) {
-            buckets[entry.second].push_back(entry.first);
+            buckets[entry.second].append(entry.second, entry.first);
         }
 
         // Build the result string by appending characters from buckets
         for (int i = maxFreq; i > 0; --i) {
-            for (char c : buckets[i]) {
-                res += string(i, c);
+            if (buckets.find(i) != buckets.end()) {
+                res += buckets[i];
             }
         }
 
