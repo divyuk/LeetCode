@@ -16,7 +16,7 @@ public:
         ListNode* current = head;
         ListNode* forw = head->next;
         
-        while(current and forw ){
+        while(forw ){
             
             if(forw->val == current->val){
                 current->next = forw->next;
