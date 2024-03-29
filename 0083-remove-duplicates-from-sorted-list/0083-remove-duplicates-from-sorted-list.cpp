@@ -12,7 +12,7 @@ class Solution {
 public:
     ListNode* deleteDuplicates(ListNode* head) {
         if(!head or !head->next) return head;
-        ListNode* prev = NULL;
+
         ListNode* current = head;
         ListNode* forw = head->next;
         
