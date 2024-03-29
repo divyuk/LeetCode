@@ -9,14 +9,22 @@ public:
     
     void dfs(vector<vector<char>>& grid, int i, int j, int r,int c){
         grid[i][j]='0';
-        if(valid(grid,i+1,j,r,c))
-            dfs(grid,i+1,j,r,c);
-       if(valid(grid,i-1,j,r,c))
-            dfs(grid,i-1,j,r,c);
-       if(valid(grid,i,j+1,r,c))
-            dfs(grid,i,j+1,r,c);
-       if(valid(grid,i,j-1,r,c))
-            dfs(grid,i,j-1,r,c);
+        vector<pair<int, int>> directions = {{1,0} , {-1,0} , {0,1} , {0,-1}};
+        
+        for(pair<int, int> &dir:  directions){
+            int newR = i+dir.first;
+            int newC = j + dir.second;
+            if(valid(grid, newR , newC,r,c))
+                dfs(grid, newR, newC , r,c);
+        }
+       //  if(valid(grid,i+1,j,r,c))
+       //      dfs(grid,i+1,j,r,c);
+       // if(valid(grid,i-1,j,r,c))
+       //      dfs(grid,i-1,j,r,c);
+       // if(valid(grid,i,j+1,r,c))
+       //      dfs(grid,i,j+1,r,c);
+       // if(valid(grid,i,j-1,r,c))
+       //      dfs(grid,i,j-1,r,c);
     }
     
     
