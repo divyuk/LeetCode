@@ -11,19 +11,18 @@
  */
 class Solution {
 public:
-    int ans=0;
-    int height(TreeNode* root){
-        if(root == NULL) return 0;
-        int lh = height(root->left);
-        int rh = height(root->right);
-        ans = max(ans,1+lh+rh);
-        return 1+max(lh,rh);
+    
+    int dia(TreeNode* root , int &ans){
+        if(!root) return 0;
+        int lh = dia(root->left, ans);
+        int rh = dia(root->right, ans);
+        ans = max(ans, 1+lh+rh);
+        return  1 + max(lh,rh);
     }
     
     int diameterOfBinaryTree(TreeNode* root) {
-        // we will say go to each node calculate its left subtree height then right subtree height add 1 to include the root. Keep holding the max.
-        
-        int node = height(root);
+        int ans =0;
+        int x = dia(root,ans);
         return ans-1;
     }
 };
