@@ -1,33 +1,19 @@
 class Solution {
-private:
-    vector<int> nums;
-    vector<int> mul;
-     int n ,m;
-    vector<vector<int>>dp;
 public:
-
-    int f(int i, int left){
-
-        if(i == m) return 0;
+    int maximumScore(std::vector<int>& nums, std::vector<int>& multipliers) {
+        int n = nums.size();
+        int m = multipliers.size();
+        std::vector<std::vector<int>> dp(m + 1, std::vector<int>(m + 1, 0));
         
-        int mult  = mul[i];
-        int right = n-1-(i-left);
+        for (int i = m - 1; i >= 0; i--) {
+            for (int left = i; left >= 0; left--) {
+                int mult = multipliers[i];
+                int right = n - 1 - (i - left);
+                dp[i][left] = std::max(mult * nums[left] + dp[i + 1][left + 1], 
+                                       mult * nums[right] + dp[i + 1][left]);
+            }
+        }
         
-        if(dp[i][left] != -1) return dp[i][left];
-        
-        int start = nums[left]*mult+ f(i+1, left+1);
-        int end =  nums[right]*mult + f(i+1, left);
-        return dp[i][left] =  max(start,end);
-        
-    }
-    
-    
-    int maximumScore(vector<int>& nums, vector<int>& mul) {
-        n = nums.size();
-        m = mul.size();
-        this->nums=nums;
-        this->mul = mul;
-        dp.resize(m,vector<int>(m,-1));
-        return f(0,0);
+        return dp[0][0];
     }
 };
