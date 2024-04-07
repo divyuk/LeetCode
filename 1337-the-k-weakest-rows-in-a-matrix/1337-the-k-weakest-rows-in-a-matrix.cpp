@@ -1,16 +1,18 @@
 class Solution {
 public:
     vector<int> kWeakestRows(vector<vector<int>>& mat, int k) {
-        vector<vector<int>>temp(mat.size() , vector<int>(2,0));
+        typedef pair<int,int>SolRow;
+        priority_queue<SolRow, vector<SolRow>, greater<SolRow>>pq;
+        
         for(int i =0; i<mat.size() ; i++){
             int sum = accumulate(mat[i].begin() , mat[i].end() ,0);
-            temp[i][0] = sum;
-            temp[i][1] = i;
+            pq.push({sum,i});
         }
-        sort(temp.begin() , temp.end());
         vector<int>ans;
-        for(int i =0;i<k;i++)
-            ans.push_back(temp[i][1]);
+        while(k-- ){
+            ans.push_back(pq.top().second);
+            pq.pop();
+        }
         return ans;
     }
 };
