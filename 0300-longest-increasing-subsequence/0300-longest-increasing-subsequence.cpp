@@ -1,24 +1,24 @@
-#include <vector>
-#include <algorithm>
-
 class Solution {
 public:
+    
+    int solve(int idx , int prev, vector<int>&nums, vector<vector<int>>&dp){
+        if(idx == nums.size()) return 0;
+        int take=0;
+        
+        if(prev!=-1 and dp[prev][idx]!=-1) return dp[prev][idx];
+        
+        if(prev==-1 or nums[prev]<nums[idx]  ) take = 1 + solve(idx+1, idx, nums,dp);
+        
+            
+        int notTake = solve(idx+1 , prev, nums,dp );
+        
+        if(prev!=-1) dp[prev][idx] = max(take, notTake);
+        return max(take, notTake);
+    }
+    
     int lengthOfLIS(vector<int>& nums) {
-        if(nums.empty()) {
-            return 0;
-        }
-
         int n = nums.size();
-        vector<int> dp(n, 1);
-
-        for(int i = 1; i < n; ++i) {
-            for(int j = 0; j < i; ++j) {
-                if(nums[i] > nums[j]) {
-                    dp[i] = max(dp[i], dp[j] + 1);
-                }
-            }
-        }
-
-        return *max_element(dp.begin(), dp.end());
+        vector<vector<int>>dp(n+1, vector<int>(n+1,-1));
+        return solve(0,-1,nums,dp);
     }
 };
