@@ -15,6 +15,20 @@ public:
     int change( int amount, vector<int>& coins) {
         int n = coins.size();
         vector<vector<int>>cache(n,vector<int>(amount+1,-1));
-        return f(n-1, coins, amount, cache);
+        
+        
+        for(int t= 0; t<=amount ; t++) cache[0][t] = t%coins[0]==0;
+        
+        for(int idx = 1; idx<n; idx++){
+            for(int t = 0; t<=amount; t++){
+                int notTake = cache[idx-1][t];
+                int take=0;
+                if(coins[idx] <= t) take = cache[idx][t-coins[idx]];
+                cache[idx][t] = take+notTake;
+            }
+        }
+        
+        return cache[n-1][amount];
+        // return f(n-1, coins, amount, cache);
     }
 };
