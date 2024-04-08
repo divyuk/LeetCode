@@ -1,17 +1,26 @@
 class Solution {
 public:
+    
+    bool solve( int idx, string s, int n,  unordered_set<string>&dict, vector<int>&dp){
+        
+        if( idx == n ) return true;
+        
+        if(dict.find(s) != dict.end()) return true;
+        
+        if(dp[idx] != -1 ) return dp[idx];
+        
+        for(int l = 1;l<=n; l++){
+            string broke = s.substr(idx,l);
+            if(dict.find(broke) != dict.end() and solve(idx+l, s,n, dict,dp) )
+                return dp[idx] =  true;
+        }
+        return dp[idx] = false;
+    }
+    
     bool wordBreak(string s, vector<string>& wordDict) {
         int n = s.size();
-        vector<bool> dp(n + 1, false);
-        dp[n] = true; // Base case: empty string can be segmented
-        unordered_set<string> dict(wordDict.begin(), wordDict.end());
-        for (int i = n - 1; i >= 0; i--) {
-            for (string& word : wordDict) {
-                if (i + word.size() <= n && dict.find(s.substr(i, word.size())) != dict.end()) {
-                    dp[i] = dp[i] || dp[i + word.size()];
-                }
-            }
-        }
-        return dp[0];
+        unordered_set<string>dict(wordDict.begin(), wordDict.end());\
+        vector<int>dp(n+1, -1);
+        return solve(0, s, n,dict , dp);
     }
 };
