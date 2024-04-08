@@ -13,7 +13,7 @@ public:
             kclose.push({d, {x, y}});
         }
 
-        while (k-- > 0) {
+        while (k--) {
             corr curr = kclose.top();
             kclose.pop();
             vector<int> temp = {curr.second.first, curr.second.second};
