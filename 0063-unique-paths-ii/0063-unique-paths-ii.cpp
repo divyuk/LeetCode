@@ -11,7 +11,7 @@ public:
         
         vector<vector<long long>> dp(m, vector<long long>(n, 0));
         
-        dp[0][0] = 1 - obstacleGrid[0][0];
+        dp[0][0] = 1;
         
         // Fill the first column
         for (int i = 1; i < m; i++) {
