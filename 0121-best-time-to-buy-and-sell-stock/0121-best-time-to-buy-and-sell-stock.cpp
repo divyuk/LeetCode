@@ -5,9 +5,9 @@ public:
         int buy = prices[0];
         int sell=0;
         int length = prices.size();
-        for(int price = 1 ; price < length ; price++){
-            buy = min(buy, prices[price]);
-            sell = max( sell , prices[price] - buy);
+        for(int i = 1 ; i < length ; i++){
+            buy = min(buy, prices[i]);
+            sell = max( sell , prices[i] - buy);
         }
         return sell;
     }
