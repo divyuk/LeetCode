@@ -9,6 +9,19 @@ public:
     }
     
     int numWays(int n, int k) {
-        return f(n,k);
+        // return f(n,k);
+        if(n==0) return 0;
+        if(n==1) return k;
+        if(n==2 ) return k*k;
+        
+        int prev2 =k;
+        int prev = k*k;
+        int ans=0;
+        for(int i =3; i<=n ; i++){
+            ans = (k-1) * (prev2 + prev);
+            prev2 = prev;
+            prev = ans;
+        }
+        return prev;
     }
 };
