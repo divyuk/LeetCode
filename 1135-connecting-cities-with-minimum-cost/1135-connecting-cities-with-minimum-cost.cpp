@@ -1,16 +1,20 @@
-#include <vector>
-#include <queue>
-#include <utility> // for pair
-
-using namespace std;
-
 class Solution {
 public:
     int minimumCost(int n, vector<vector<int>>& connections) {
-        // Define a pair for weight and node
-        typedef pair<int, int> M;
+        // Create an adjacency list to represent the graph
+        vector<vector<pair<int, int>>> adjList(n + 1);
 
-        // Priority queue to store weight -- node
+        // Fill the adjacency list from the given connections
+        for (const auto& conn : connections) {
+            int from = conn[0];
+            int to = conn[1];
+            int weight = conn[2];
+            adjList[from].push_back({to, weight});
+            adjList[to].push_back({from, weight});
+        }
+
+        // Use Prim's Algorithm to find the minimum spanning tree
+        typedef pair<int, int> M;
         priority_queue<M, vector<M>, greater<M>> pq;
         vector<bool> visited(n + 1, false);
         int ans = 0;
@@ -27,17 +31,9 @@ public:
                 ans += w;
                 visited[c] = true;
 
-                for (auto& it : connections) {
-                    int node, weight;
-                    if (it[0] == c) {
-                        node = it[1];
-                        weight = it[2];
-                    } else if (it[1] == c) {
-                        node = it[0];
-                        weight = it[2];
-                    } else {
-                        continue; // Not a connection from this city
-                    }
+                for (const auto& neighbor : adjList[c]) {
+                    int node = neighbor.first;
+                    int weight = neighbor.second;
 
                     if (!visited[node]) {
                         pq.push({weight, node});
