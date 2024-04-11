@@ -3,12 +3,27 @@ public:
     string alienOrder(vector<string>& words) {
         // Step 0: Create data structures and find all unique letters.
         unordered_map<char, vector<char>> adjList;
-        unordered_map<char, int> counts;
+        unordered_map<char, int> counts; // this is indegree
         for (const string& word : words) {
             for (char c : word) {
                 counts[c] = 0;
                 adjList[c] = vector<char>();
             }
+        }
+        // Printing adjList
+        cout << "Adjacency List:" << endl;
+        for (const auto& pair : adjList) {
+            cout << pair.first << ": ";
+            for (char c : pair.second) {
+                cout << c << " ";
+            }
+            cout << endl;
+        }
+        
+        // Printing counts
+        cout << "Counts:" << endl;
+        for (const auto& pair : counts) {
+            cout << pair.first << ": " << pair.second << endl;
         }
         
         // Step 1: Find all edges.
@@ -27,6 +42,22 @@ public:
                     break;
                 }
             }
+        }
+        cout<<"----\n";
+       // Printing adjList
+        cout << "Adjacency List:" << endl;
+        for (const auto& pair : adjList) {
+            cout << pair.first << ": ";
+            for (char c : pair.second) {
+                cout << c << " ";
+            }
+            cout << endl;
+        }
+        
+        // Printing counts
+        cout << "Counts:" << endl;
+        for (const auto& pair : counts) {
+            cout << pair.first << ": " << pair.second << endl;
         }
         
         // Step 2: Breadth-first search.
