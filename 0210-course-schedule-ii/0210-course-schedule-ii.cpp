@@ -10,7 +10,10 @@ public:
             adj[u].push_back(v);
             indegree[v]++;
         }
-        
+        for(auto i : adj){
+            for(int q : i) cout<< q <<" ";
+            cout<<"\n";
+        }
         queue<int>q;
         for(int i =0 ;i<n;i++){
             if(indegree[i] == 0) q.push(i);
