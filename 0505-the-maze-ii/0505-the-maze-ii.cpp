@@ -17,7 +17,7 @@ public:
                 int y = s[1] + dir[1];
                 int count = 0;
                 
-                while (x >= 0 && y >= 0 && x < maze.size() && y < maze[0].size() && maze[x][y] == 0) {
+                while (x>= 0 && y>= 0 && x <maze.size() && y<maze[0].size() && maze[x][y] == 0) {
                     x += dir[0];
                     y += dir[1];
                     count++;
