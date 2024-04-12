@@ -1,59 +1,52 @@
-#include <vector>
-#include <queue>
-#include <unordered_map>
-#include <utility>
-
-using namespace std;
-
 class Solution {
 public:
     int networkDelayTime(vector<vector<int>>& times, int n, int k) {
-        // 1. Convert to adj
+        
         unordered_map<int, vector<pair<int, int>>> adj;
-        for (vector<int>& edge : times) {
-            int u = edge[0];
-            int v = edge[1];
-            int time = edge[2];
-            adj[u].push_back({v, time});
+        for(auto &vec : times) {
+            
+            int u = vec[0];
+            int v = vec[1];
+            int w = vec[2];
+            
+            adj[u].push_back({v, w});
+            
         }
+        
+        priority_queue<pair<int, int>, vector<pair<int, int>>, greater<pair<int, int>>> pq;
 
-        // 2. Initialize result array
-        vector<int> result(n + 1, -1);
-        vector<bool> visited(n + 1, false);
+	vector<int> result(n+1, INT_MAX);
 
-        // 3. Min heap
-        typedef pair<int, int> P;
-        priority_queue<P, vector<P>, greater<P>> pq; // store time -> node
-        pq.push({0, k});
+	result[k] = 0;
+	pq.push({0, k});
 
-        while (!pq.empty()) {
-            int currTime = pq.top().first;
-            int currNode = pq.top().second;
-            pq.pop();
+	while(!pq.empty()) {
 
-            if (!visited[currNode]) {
-                visited[currNode] = true;
-                result[currNode] = currTime;
+	    int d  = pq.top().first;
+	    int node = pq.top().second;
+	    pq.pop();
 
-                for (pair<int, int>& next : adj[currNode]) {
-                    int node = next.first;
-                    int time = next.second;
+	    for(auto &vec : adj[node]) {
 
-                    if (!visited[node]) {
-                        pq.push({currTime + time, node});
-                    }
-                }
-            }
-        }
+		int adjNode = vec.first;
+		int dist    = vec.second;
 
-        int maxTime = 0;
-        for (int i = 1; i <= n; ++i) {
-            if (result[i] == -1) {
-                return -1; // Some nodes are not reachable
-            }
-            maxTime = max(maxTime, result[i]);
-        }
+		if(d + dist < result[adjNode]) {
 
-        return maxTime;
+		    result[adjNode] = d + dist;
+		    pq.push({d+dist, adjNode});
+
+		}
+
+	    }
+
+	}
+        
+        int ans = INT_MIN;
+        
+        for(int i = 1; i <= n; i++)
+            ans = max(ans, result[i]);
+        
+	return ans == INT_MAX ? -1 : ans;
     }
 };
