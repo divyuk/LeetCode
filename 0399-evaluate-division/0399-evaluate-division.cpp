@@ -1,89 +1,58 @@
-class UnionFind {
-private:
-    vector<int> parent;
-    vector<double> weight;
-
-public:
-    UnionFind(int n) : parent(n), weight(n, 1.0) {
-        for (int i = 0; i < n; ++i) {
-            parent[i] = i;
-        }
-    }
-
-    int find(int x) {
-        if (parent[x] != x) {
-            int originalParent = parent[x];
-            parent[x] = find(parent[x]);
-            weight[x] *= weight[originalParent];
-        }
-        return parent[x];
-    }
-
-    void unite(int x, int y, double value) {
-        int rootX = find(x);
-        int rootY = find(y);
-
-        if (rootX == rootY) return;
-
-        parent[rootX] = rootY;
-        weight[rootX] = weight[y] * (value / weight[x]);
-    }
-
-    double query(int x, int y) {
-        if (find(x) != find(y)) return -1.0;
-        return weight[x] / weight[y];
-    }
-};
-
 class Solution {
+private:
+    double bfs(unordered_map<string, vector<pair<string, double>>>& adj, const string& src, const string& dest) {
+        if (adj.find(src) == adj.end() || adj.find(dest) == adj.end()) return -1.0;
+        
+        set<string> visit;
+        queue<pair<string, double>> q;
+        q.push({src, 1.0});
+        visit.insert(src);
+        
+        while (!q.empty()) {
+            string node = q.front().first;
+            double weight = q.front().second;
+            q.pop();
+            
+            if (node == dest) return weight;
+            
+            for (const auto& neighbor : adj[node]) {
+                string next = neighbor.first;
+                double edgeWeight = neighbor.second;
+                
+                if (visit.find(next) == visit.end()) {
+                    q.push({next, weight * edgeWeight});
+                    visit.insert(next);
+                }
+            }
+        }
+        
+        return -1.0;
+    }
+
 public:
     vector<double> calcEquation(vector<vector<string>>& equations, vector<double>& values, vector<vector<string>>& queries) {
-        unordered_map<string, int> variableToIndex;
-        int index = 0;
-
-        // Assign indices to variables
-        for (const auto& equation : equations) {
-            const string& var1 = equation[0];
-            const string& var2 = equation[1];
-
-            if (!variableToIndex.count(var1)) {
-                variableToIndex[var1] = index++;
-            }
-            if (!variableToIndex.count(var2)) {
-                variableToIndex[var2] = index++;
-            }
-        }
-
-        UnionFind uf(index);
-
-        // Populate the Union-Find with equations and values
+        unordered_map<string, vector<pair<string, double>>> adj;
+        
+        // Build the adjacency list graph
         for (int i = 0; i < equations.size(); ++i) {
-            const string& var1 = equations[i][0];
-            const string& var2 = equations[i][1];
+            const string& u = equations[i][0];
+            const string& v = equations[i][1];
             double value = values[i];
-
-            uf.unite(variableToIndex[var1], variableToIndex[var2], value);
+            
+            adj[u].push_back({v, value});
+            adj[v].push_back({u, 1.0 / value});
         }
-
-        vector<double> results;
-
-        // Evaluate queries
-        for (const auto& query : queries) {
-            const string& start = query[0];
-            const string& end = query[1];
-
-            if (!variableToIndex.count(start) || !variableToIndex.count(end)) {
-                results.push_back(-1.0);
-                continue;
-            }
-
-            int indexStart = variableToIndex[start];
-            int indexEnd = variableToIndex[end];
-
-            results.push_back(uf.query(indexStart, indexEnd));
+        
+        // Perform BFS for each query
+        vector<double> result;
+        for (int i = 0; i < queries.size(); ++i) {
+            const string& src = queries[i][0];
+            const string& dest = queries[i][1];
+            
+            result.push_back(bfs(adj, src, dest));
         }
-
-        return results;
+        
+        return result;
     }
 };
 
