@@ -1,53 +1,41 @@
-#include <string>
-using namespace std;
-
 class Solution {
+    bool checkValidString(string s) {
+        stack<int>stk1;
+        stack<int>stk2;
+        for(int i =0;i<s.length() ; i++){
+            char c = s[i];
+            if(c == '(') stk1.push(i);
+            
+            else if(c == '*') stk2.push(i);
+            
+            
+            else{
+                if(!stk1.empty()) stk1.pop();
+                else if(!stk2.empty()) stk2.pop();
+                else return false;
+            }
+        }
+
+        // ((******* this is valid as ( appears before * 
+        // ****(( this is not valid
+        
+        while(!stk1.empty() and !stk2.empty()){
+            if(stk1.top() > stk2.top() ) return false;
+            stk1.pop();
+            stk2.pop();
+        }
+        
+        return stk1.empty();
+    }
 public:
     bool canBeValid(string s, string locked) {
-        int close_paranthesis = 0;
-        int open_paranthesis = 0;
-        int flip_allowed = 0;
-
-        if (s.length() % 2 != 0) {
-            return false;
+        int n = s.size();
+        if(n&1) return 0;
+        for(int i = 0; i<n ; i++ ){
+            if(locked[i] == '0') s[i] = '*';
         }
-
-        for (int i = 0; i < s.length(); ++i) {
-            if (locked[i] == '0') {
-                flip_allowed++;
-            } else {
-                if (s[i] == '(') {
-                    open_paranthesis++;
-                } else {
-                    close_paranthesis++;
-                }
-            }
-
-            if (flip_allowed + open_paranthesis < close_paranthesis) {
-                return false;
-            }
-        }
-
-        close_paranthesis = 0;
-        open_paranthesis = 0;
-        flip_allowed = 0;
-
-        for (int i = s.length() - 1; i >= 0; --i) {
-            if (locked[i] == '0') {
-                flip_allowed++;
-            } else {
-                if (s[i] == '(') {
-                    open_paranthesis++;
-                } else {
-                    close_paranthesis++;
-                }
-            }
-
-            if (flip_allowed + close_paranthesis < open_paranthesis) {
-                return false;
-            }
-        }
-
-        return true;
+        return checkValidString(s);
     }
+    
+    
 };
