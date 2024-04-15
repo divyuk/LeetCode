@@ -21,6 +21,14 @@ public:
         for (auto& intervals : schedule) {
             merged.insert(merged.end(), intervals.begin(), intervals.end());
         }
+        
+        // Print merged vector for debugging
+        cout << "Merged Vector: ";
+        for (const auto& interval : merged) {
+            cout << "[" << interval.start << ", " << interval.end << "] ";
+        }
+        cout << endl;
+        
         sort(merged.begin(), merged.end(), [](const Interval& a, const Interval& b) {
             return a.start < b.start;
         });
