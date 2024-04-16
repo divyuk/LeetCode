@@ -1,15 +1,9 @@
-#include <vector>
-#include <queue>
-#include <utility>
-#include <algorithm>
-using namespace std;
-
 class Solution {
 public:
     int getFood(vector<vector<char>>& grid) {
         int m = grid.size();
         int n = grid[0].size();
-        const int INF = 2147483647;  // Max value for INF
+        const int INF = 1e6;  // Max value for INF
 
         vector<vector<int>> mat(m, vector<int>(n, INF));
 
