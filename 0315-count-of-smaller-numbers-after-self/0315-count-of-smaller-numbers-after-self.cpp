@@ -1,38 +1,50 @@
 class Solution {
-    vector<int> bit;
-    
-    int query(int idx) {
-        int sum = 0;
-        while (idx > 0) {
-            sum += bit[idx];
-            idx -= idx & -idx;
-        }
-        return sum;
-    }
-    
-    void update(int idx, int val) {
-        while (idx < bit.size()) {
-            bit[idx] += val;
-            idx += idx & -idx;
-        }
-    }
-    
 public:
     vector<int> countSmaller(vector<int>& nums) {
-        int n = nums.size();
-        vector<int> sortedNums(nums);
-        sort(sortedNums.begin(), sortedNums.end());
-        
-        // Initialize BIT with size equal to the maximum element in nums
-        bit.resize(n + 1);
-        
-        vector<int> result(n);
-        for (int i = n - 1; i >= 0; --i) {
-            int idx = lower_bound(sortedNums.begin(), sortedNums.end(), nums[i]) - sortedNums.begin() + 1;
-            result[i] = query(idx - 1);
-            update(idx, 1);
+        vector<int> counts(nums.size(), 0);
+        vector<pair<int, int>> indexedNums(nums.size());
+        for (int i = 0; i < nums.size(); ++i) {
+            indexedNums[i] = {nums[i], i};
         }
         
-        return result;
+        mergeSort(indexedNums, counts);
+        return counts;
+    }
+    
+    void mergeSort(vector<pair<int, int>>& indexedNums, vector<int>& counts) {
+        if (indexedNums.size() <= 1) return;
+        
+        int mid = indexedNums.size() / 2;
+        vector<pair<int, int>> left(indexedNums.begin(), indexedNums.begin() + mid);
+        vector<pair<int, int>> right(indexedNums.begin() + mid, indexedNums.end());
+        
+        mergeSort(left, counts);
+        mergeSort(right, counts);
+        
+        int i = 0, j = 0, k = 0;
+        while (i < left.size() && j < right.size()) {
+            if (left[i].first <= right[j].first) {
+                indexedNums[k] = left[i];
+                counts[left[i].second] += j;  // Increment count of smaller elements
+                ++i;
+            } else {
+                indexedNums[k] = right[j];
+                ++j;
+            }
+            ++k;
+        }
+        
+        while (i < left.size()) {
+            indexedNums[k] = left[i];
+            counts[left[i].second] += j;  // Increment count of smaller elements
+            ++i;
+            ++k;
+        }
+        
+        while (j < right.size()) {
+            indexedNums[k] = right[j];
+            ++j;
+            ++k;
+        }
     }
 };
