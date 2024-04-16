@@ -21,6 +21,11 @@ public:
         mergeSort(left, counts);
         mergeSort(right, counts);
         
+        merge(indexedNums, left, right, counts);
+    }
+    
+    void merge(vector<pair<int, int>>& indexedNums, vector<pair<int, int>>& left,
+               vector<pair<int, int>>& right, vector<int>& counts) {
         int i = 0, j = 0, k = 0;
         while (i < left.size() && j < right.size()) {
             if (left[i].first <= right[j].first) {
