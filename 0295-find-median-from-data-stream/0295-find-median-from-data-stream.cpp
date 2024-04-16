@@ -30,7 +30,7 @@ public:
     }
 };
 
-/**
+/** run on 1 3 4 5 7 9
  * Your MedianFinder object will be instantiated and called as such:
  * MedianFinder* obj = new MedianFinder();
  * obj->addNum(num);
