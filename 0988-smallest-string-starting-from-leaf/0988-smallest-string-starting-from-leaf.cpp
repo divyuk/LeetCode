@@ -1,6 +1,6 @@
 class Solution {
 private:
-        string smallestString;
+        string smallestString="~";
         void dfs(TreeNode* root, string currentString) {
             if (!root)   return;
             currentString = char(root->val + 'a') + currentString; 
@@ -8,7 +8,7 @@ private:
             if (!root->left && !root->right) { 
                 // If the current string is smaller than the result 
                 // or if the result is empty
-                if (smallestString == "" || smallestString > currentString)
+                if (smallestString > currentString)
                     smallestString = currentString;
                 
             }
