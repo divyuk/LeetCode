@@ -1,37 +1,37 @@
 class Solution {
 private:
-    void dfs(TreeNode* node, string& currentPath, string& smallestPath) {
-        if (!node) return;
-        
-        currentPath += char('a' + node->val);  // Append the current node's character to the path
-        
-        if (!node->left && !node->right) {  // Leaf node
-            // Compare the current path with the smallest path found so far
-            // Update smallestPath if the current path is smaller
-            string currentRev = currentPath;
-            reverse(currentRev.begin(), currentRev.end());
-            if (currentRev < smallestPath) {
-                smallestPath = currentRev;
+        string smallestString;
+        void dfs(TreeNode* root, string currentString) {
+
+
+            if (!root)   return;
+
+
+            // Construct the current string by appending 
+            // the character corresponding to the node's value
+            currentString = char(root->val + 'a') + currentString; 
+
+            if (!root->left && !root->right) { 
+                // If the current string is smaller than the result 
+                // or if the result is empty
+                if (smallestString == "" || smallestString > currentString) { 
+                    smallestString = currentString;
+                }
+            }
+
+            // Recursively traverse the left subtree
+            // if (root->left) {
+                dfs(root->left, currentString);
+            // }
+
+            // Recursively traverse the right subtree
+            if (root->right) {
+                dfs(root->right, currentString);
             }
         }
-        
-        // Recur for left and right children
-        dfs(node->left, currentPath, smallestPath);
-        dfs(node->right, currentPath, smallestPath);
-        
-        // Backtrack: remove the current node's character from the path
-        currentPath.pop_back();
-    }
-    
 public:
-    string smallestFromLeaf(TreeNode* root) {
-        string currentPath = "";
-        string smallestPath = "~";  // Initialize with a path that is lexicographically larger than any valid path
-        
-        dfs(root, currentPath, smallestPath);
-        
-        // reverse(smallestPath.begin(), smallestPath.end());  // Reverse the path to get the correct order
-        return smallestPath;
+        string smallestFromLeaf(TreeNode* root) {
+        dfs(root, "");
+        return smallestString;
     }
-    
 };
