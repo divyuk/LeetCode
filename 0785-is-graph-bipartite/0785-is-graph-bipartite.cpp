@@ -1,5 +1,18 @@
 class Solution {
     
+    bool dfs(unordered_map<int, vector<int>>& adj, vector<int> &visited, int start, int col){
+    
+        visited[start] = col;
+        for(int u : adj[start]){
+            if(visited[u]==-1) {
+                if(dfs(adj, visited, u, !col) == false) return false; 
+            }
+    
+            else if(visited[u] == col) return false;
+        }
+        return true;
+    }
+    
     bool bfs(unordered_map<int, vector<int>>& adj, vector<int> &visited, int start){
         queue<int>q;
         q.push(start);
@@ -30,7 +43,8 @@ public:
         vector<int> visited(n, -1);
         for(int i = 0; i<n; i++){
             if(visited[i] == -1){
-                if(bfs(adj, visited, i) == false) return false;
+                // if(bfs(adj, visited, i) == false) return false;
+                if(dfs(adj, visited, i, 0) == false) return false;
             }
         }
         
