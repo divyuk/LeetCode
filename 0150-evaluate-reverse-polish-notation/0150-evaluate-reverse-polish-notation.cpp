@@ -7,9 +7,9 @@ public:
 			int op1 = stoi(tokens[--top]); 
 			int op2 = stoi(tokens[--top]); 
 			if(t == "+") op1 = op2 + op1;
-			if(t == "-") op1 = op2 - op1;
-			if(t == "/") op1 = op2 / op1;
-			if(t == "*") op1 = op2 * op1;   
+			else if(t == "-") op1 = op2 - op1;
+			else if(t == "/") op1 = op2 / op1;
+			else if(t == "*") op1 = op2 * op1;   
 			tokens[top++] = to_string(op1);
 		}
 		else tokens[top++] = t;
