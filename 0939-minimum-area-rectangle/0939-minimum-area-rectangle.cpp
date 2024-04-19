@@ -4,9 +4,8 @@ public:
         int ans = INT_MAX;
         unordered_map<int, unordered_set<int>> mymap;
         
-        for (auto p : points) {
-            mymap[p[0]].insert(p[1]);
-        }
+        for (auto p : points) mymap[p[0]].insert(p[1]);
+        
         
         /*
             A ----------------------------D
