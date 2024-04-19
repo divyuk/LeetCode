@@ -1,42 +1,58 @@
-typedef long long ll;
+//Approach-2 (Use priority Queue to find the first available meeting room)
+//T.C : O(mlogm + m*log(n)) , where Let n = number of rooms, m =  number of meetings
+//S.C : O(n)
 class Solution {
 public:
+    typedef pair<long long, int> P;
+
     int mostBooked(int n, vector<vector<int>>& meetings) {
         int m = meetings.size();
-        sort(meetings.begin() , meetings.end());
-        vector<int>roomUsedCount(n,0); // Each room is used 0 time in the begining
-        vector<ll>lastAvailable(n,0);
+
+        sort(begin(meetings), end(meetings)); //sort by starting time of meetings
+
+        vector<int> roomsUsedCount(n, 0); //Each room is used 0 times in the beginning
+
+        priority_queue<P, vector<P>, greater<P>> usedRooms;
+        //To store {earliest room empty time, room No.}
         
- 
-        for(vector<int>&meet : meetings){
-            int start = meet[0];
-            int end   = meet[1];
-            ll earlyEndRoomTime =LLONG_MAX;
-            int EarlyEndRoom = 0;
-            bool found = false;
-            for(int room = 0; room < n ; room++){
-                if(lastAvailable[room] <= start){
-                    lastAvailable[room] = end;
-                    roomUsedCount[room]++;
-                    found = true;
-                    break;
-                }
-                // mechanism to keep note of which room is going to finish early
-                if(lastAvailable[room] < earlyEndRoomTime){
-                    earlyEndRoomTime = lastAvailable[room]; // Store when its finishes
-                    EarlyEndRoom = room; // Store the room number
-                }
-            }
-            if(!found){
-                lastAvailable[EarlyEndRoom] += (end - start);
-                roomUsedCount[EarlyEndRoom]++;
-            }
+        priority_queue<int, vector<int>, greater<int>> unusedRooms;
+        //To store rooms that are used
+        for(int room = 0; room < n; room++) {
+            unusedRooms.push(room); //All rooms are unused in the beginning
         }
+
+        for(vector<int>& meet : meetings) {
+            int start  = meet[0];
+            int end    = meet[1];
+
+            //First see, by this time, which rooms can be empty now
+            //And move them to unusedRooms
+            while(!usedRooms.empty() && usedRooms.top().first <= start) {
+                int room = usedRooms.top().second;
+                usedRooms.pop();
+                unusedRooms.push(room);
+            }
+
+            if(!unusedRooms.empty()) {
+                int room = unusedRooms.top();
+                unusedRooms.pop();
+                usedRooms.push({end, room});
+                roomsUsedCount[room]++;
+            } else { //We don't have any room available now. Pick earliest end room
+                int room          = usedRooms.top().second;
+                long long endTime = usedRooms.top().first;
+                usedRooms.pop();
+                usedRooms.push({endTime + (end-start), room});
+                roomsUsedCount[room]++;
+            }
+
+        }
+
         int resultRoom = -1;
         int maxUse     = 0;  
         for(int room = 0; room < n; room++) {
-            if(roomUsedCount[room] > maxUse) {
-                maxUse = roomUsedCount[room];
+            if(roomsUsedCount[room] > maxUse) {
+                maxUse = roomsUsedCount[room];
                 resultRoom = room;
             }
         }
