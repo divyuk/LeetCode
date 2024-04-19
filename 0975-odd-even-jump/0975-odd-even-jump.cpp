@@ -7,13 +7,11 @@ public:
 
         stack<int> stack1, stack2;
         vector<pair<int, int>> sortedA;
-        for (int i = 0; i < n; i++) {
-            sortedA.push_back({A[i], i});
-        }
+        
+        for (int i = 0; i < n; i++) sortedA.push_back({A[i], i});
+        
 
-        sort(sortedA.begin(), sortedA.end(), [](const pair<int, int>& a, const pair<int, int>& b) {
-            return a.first != b.first ? a.first < b.first : a.second < b.second;
-        });
+        sort(sortedA.begin(), sortedA.end());
 
         for (auto& p : sortedA) {
             int a = p.first, i = p.second;
