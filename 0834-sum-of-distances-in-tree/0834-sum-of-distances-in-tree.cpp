@@ -1,5 +1,4 @@
 class Solution {
-public:
     //store count of subtrees of each node
     long result_base_node = 0;
     vector<int> count;
@@ -33,6 +32,8 @@ public:
         }
         
     }
+public:
+
     
     vector<int> sumOfDistancesInTree(int n, vector<vector<int>>& edges) {
         unordered_map<int, vector<int>> adj;
