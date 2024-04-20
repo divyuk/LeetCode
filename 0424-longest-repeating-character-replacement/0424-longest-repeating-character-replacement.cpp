@@ -1,7 +1,7 @@
 class Solution {
 public:
     int characterReplacement(string s, int k) {
-        map<char,int>m;
+        unordered_map<char,int>m;
         int n = s.size();
         int ans=0;
         int left =0, maxF=0;
