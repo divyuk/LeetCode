@@ -2,9 +2,8 @@ class DetectSquares {
    
 public:
     map<pair<int,int> , int> points;
-    DetectSquares() {
-        
-    }
+    DetectSquares() : points() {}
+
     
     void add(vector<int> point) {
         points[ {point[0] , point[1]} ]++;
