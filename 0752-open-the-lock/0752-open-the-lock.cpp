@@ -32,7 +32,7 @@ public:
             auto [lock, turns] = q.front();
             q.pop();
             if(lock == target) return turns;
-            for(auto child : neighbors(lock)){
+            for(auto child : children(lock)){
              
                 if(visited.find(child)==visited.end()){
                     visited.insert(child);
