@@ -10,23 +10,30 @@
  * };
  */
 class Solution {
-    vector<int> helper(TreeNode* node) {
-        // return {rob this node, not rob this node}
-        if (node == nullptr) {
-            return {0, 0};
-        }
-        vector<int> left = helper(node->left);
-        vector<int> right = helper(node->right);
-        // if we rob this node, we cannot rob its children
-        int rob = node->val + left[1] + right[1];
-        // else, we are free to choose to rob its children or not
-        int notRob = max(left[0], left[1]) + max(right[0], right[1]);
+private:
+    unordered_map<TreeNode*, int> robResult;
+    unordered_map<TreeNode*, int> notRobResult;
 
-        return {rob, notRob};
+    int helper(TreeNode* node, bool parentRobbed) {
+        if (node == nullptr) return 0;
+        
+        if (parentRobbed) {
+            if (robResult.find(node) != robResult.end()) return robResult[node];
+            
+            int result = helper(node->left, false) + helper(node->right, false);
+            robResult[node] = result;
+            return result;
+        } else {
+            if (notRobResult.find(node) != notRobResult.end()) return notRobResult[node];
+            int rob = node->val + helper(node->left, true) + helper(node->right, true);
+            int notRob = helper(node->left, false) + helper(node->right, false);
+            int result = max(rob, notRob);
+            notRobResult[node] = result;
+            return result;
+        }
     }
 public:
     int rob(TreeNode* root) {
-        vector<int> answer = helper(root);
-        return max(answer[0], answer[1]);
+        return helper(root, false);
     }
 };
