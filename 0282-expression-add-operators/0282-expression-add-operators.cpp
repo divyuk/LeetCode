@@ -19,22 +19,20 @@ private:
 
         for (int i = start; i < num.size(); ++i) {
             // Handle cases where we have a number with leading zero
-            if (i > start && num[start] == '0') {
-                break;
-            }
-
+            if (i != start && num[start] == '0') break;
+            
             string currStr = num.substr(start, i - start + 1);
             long long curr = stoll(currStr);
 
             if (start == 0) {
-                expr += currStr;
+                expr += currStr; // expression banao
                 backtrack(result, expr, num, target, i + 1, curr, curr);
                 expr.erase(expr.size() - currStr.size());
             } else {
                 // Addition
                 expr += "+" + currStr;
                 backtrack(result, expr, num, target, i + 1, currVal + curr, curr);
-                expr.erase(expr.size() - 1 - currStr.size());
+                expr.erase(expr.size() - 1 - currStr.size()); // current String se hatao
 
                 // Subtraction
                 expr += "-" + currStr;
@@ -45,7 +43,13 @@ private:
                 expr += "*" + currStr;
                 backtrack(result, expr, num, target, i + 1, currVal - prevNum + prevNum * curr, prevNum * curr);
                 expr.erase(expr.size() - 1 - currStr.size());
+                
+                
             }
         }
     }
 };
+
+
+// in case of multiplication
+// 7 + 3* 2 ==== 10 -3 + 3 *2 ==?prevNum +3
