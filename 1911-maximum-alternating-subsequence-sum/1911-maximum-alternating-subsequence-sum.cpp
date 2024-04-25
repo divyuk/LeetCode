@@ -18,17 +18,23 @@ private:
     
 public:
     long long maxAlternatingSum(vector<int>& nums) {
-        bool flag = true;
         int n = nums.size();
-        // vector<vector<ll>> dp(n+1, vector<ll>(2, -1));
-        // return f(nums, 0, flag, dp);
-        vector<vector<ll>> dp(n+1, vector<ll>(2, 0)); // 0: even 1 : odd
-        
-        for(int i = 1; i<n+1 ; i++){
-            // Even
-            dp[i][0] = max(dp[i-1][1] - nums[i-1]  , dp[i-1][0]  );
-            dp[i][1] = max(dp[i-1][0] + nums[i-1] , dp[i-1][1] );
+
+        // Initialize variables to store the previous row values
+        long long even = 0; // Maximum alternating sum ending at an even index
+        long long odd = 0;  // Maximum alternating sum ending at an odd index
+
+        for(int i = 0; i < n; i++) {
+            // Calculate the maximum alternating sum ending at the current index
+            long long new_even = max(odd - nums[i], even);
+            long long new_odd = max(even + nums[i], odd);
+
+            // Update even and odd for the next iteration
+            even = new_even;
+            odd = new_odd;
         }
-        return max(dp[n][0] , dp[n][1]);
+
+        // The maximum alternating sum will be the maximum of the last even and odd values
+        return max(even, odd);
     }
 };
