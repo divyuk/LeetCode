@@ -10,9 +10,9 @@ public:
     int climbStairs(int n) {
         // vector<int>dp(n+1,-1);
         // return count(n,dp);
-        
-        if(n==0 or n == 1) return 1;
-        if(n==2) return 2;
+        if(n<=2) return n;
+        // if(n==0 or n == 1) return 1;
+        // if(n==2) return 2;
         int prev2 = 1;
         int prev = 2;
         int nth = 0;
