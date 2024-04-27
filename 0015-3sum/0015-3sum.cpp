@@ -5,8 +5,7 @@ public:
         vector<vector<int>>ans;
         
         for(int k = 0 ; k < numbers.size() ; k++){
-            if(k>0 and numbers[k] == numbers[k-1])
-                continue;
+            if(k>0 and numbers[k] == numbers[k-1]) continue;
             
             int i = k+1, j = numbers.size()-1;
             while (i<j)
