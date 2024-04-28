@@ -9,7 +9,7 @@ public:
             umap[fruits[right]]++;
             total++;
             
-            while(umap.size() > 2){
+            if(umap.size() > 2){
                 int fruitRemove = fruits[left];
                 umap[fruitRemove]--;
                 total--;
