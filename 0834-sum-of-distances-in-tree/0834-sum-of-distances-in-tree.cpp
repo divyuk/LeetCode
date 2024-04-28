@@ -9,8 +9,7 @@ class Solution {
         result_base_node += curr_depth;
         
         for(int &child : adj[curr_node]) {
-            if(child == prev_node)
-                continue;
+            if(child == prev_node) continue;
             
             total_node += dfsBase(adj, child, curr_node, curr_depth+1);
         }
@@ -50,7 +49,7 @@ public:
         
         result_base_node = 0;
         
-        dfsBase(adj, 0, -1, 0);
+        dfsBase(adj, 0, -1, 0); // caculating distance from parent to other nodes and also filling the count of subchildren
         
         vector<int> result(n, 0);
         
@@ -61,3 +60,5 @@ public:
         return result;
     }
 };
+
+// TC : O(n) SC : O(n)
