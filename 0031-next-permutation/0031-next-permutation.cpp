@@ -2,18 +2,20 @@ class Solution {
 public:
     void nextPermutation(vector<int>& nums) {
         int n = nums.size(), k, l;
+        
+        // FInd the dip
     	for (k = n - 2; k >= 0; k--) {
-            if (nums[k] < nums[k + 1]) {
-                break;
-            }
+            if (nums[k] < nums[k + 1]) break;
+            
         }
-    	if (k < 0) {
-    	    reverse(nums.begin(), nums.end());
-    	} else {
+        
+        // If no dip then you are at last permutation, simply reverse back
+        
+    	if (k < 0)  reverse(nums.begin(), nums.end());
+    	else {
     	    for (l = n - 1; l > k; l--) {
-                if (nums[l] > nums[k]) {
-                    break;
-                }
+                if (nums[l] > nums[k]) break;
+                
             } 
     	    swap(nums[k], nums[l]);
     	    reverse(nums.begin() + k + 1, nums.end());
