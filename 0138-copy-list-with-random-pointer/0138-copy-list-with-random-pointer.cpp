@@ -16,38 +16,35 @@ public:
 
 class Solution {
 public:
-Node* copyRandomList(Node* head) {
-        if (!head) {
-            return nullptr;
-        }
-
-        // Step 1: Create a mapping between original and copied nodes
-        unordered_map<Node*, Node*> nodeMap;
-
-        // Step 2: First Pass - Create Copied Nodes
-        Node* original = head;
-        while (original) {
-            nodeMap[original] = new Node(original->val);
-            original = original->next;
-        }
-
-        // Step 3: Second Pass - Connect Next Pointers
-        original = head;
-        while (original) {
-            Node* copied = nodeMap[original];
-            copied->next = nodeMap[original->next];
-            original = original->next;
-        }
-
-        // Step 4: Third Pass - Connect Random Pointers
-        original = head;
-        while (original) {
-            Node* copied = nodeMap[original];
-            copied->random = nodeMap[original->random];
-            original = original->next;
-        }
-
-        // The head of the copied list is the node corresponding to the head of the original list.
-        return nodeMap[head];
+    Node* copyRandomList(Node* head) {
+       Node* temp = head;
+	//step 1
+    while(temp != NULL) {
+        Node* newNode = new Node(temp->val);
+        newNode->next = temp->next;
+        temp->next = newNode;
+        temp = temp->next->next;
+    }
+	//step 2
+    Node* itr = head;
+    while(itr != NULL) {
+        if(itr->random != NULL)
+            itr->next->random = itr->random->next;
+        itr = itr->next->next;
+    }
+	//step 3
+    Node* dummy = new Node(0);
+    itr = head;
+    temp = dummy;
+    Node* fast;
+    while(itr != NULL) {
+        fast = itr->next->next;
+        temp->next = itr->next;
+        itr->next = fast;
+        temp = temp->next;
+        itr = fast;
+    }
+    return dummy->next;
+  
     }
 };
