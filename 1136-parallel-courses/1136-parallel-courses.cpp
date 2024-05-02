@@ -10,9 +10,7 @@ public:
             adj[prevCourse].push_back(nextCourse);
             indegree[nextCourse]++;
         }
-        
         queue<int>q;
-      
         for(int i = 1; i<=n ; i++) {
             if(indegree[i] == 0) q.push(i);
         }
@@ -25,7 +23,6 @@ public:
                 for(auto i : adj[curr]){
                     if(--indegree[i]==0)
                         q.push(i);
-
                 }
             }
             sem++;
@@ -36,3 +33,6 @@ public:
         return sem;
     }
 };
+
+// • TC O(V + E) SC O(m + n).
+// V is the number of courses, E is the number of relations, n is the number of courses, and m is the number of relations.
