@@ -30,3 +30,6 @@ public:
         return answer;
     }
 };
+
+// TC : O(2^M * N) M : Number of request, N is the number of Buildings.
+// SC : O(N+M)
