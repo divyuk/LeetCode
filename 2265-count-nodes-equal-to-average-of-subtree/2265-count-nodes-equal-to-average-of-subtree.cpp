@@ -20,7 +20,7 @@ public:
    
         int sum = (root->val + l.first +r.first);
         int nodeCount = l.second+r.second+1;
-        if(sum/nodeCount == root->val) {count++;}
+        if(sum/nodeCount == root->val) count++;
         cout<<sum<< " " <<nodeCount <<"\n"; 
         
         return {sum,nodeCount};
