@@ -7,16 +7,9 @@ public:
         sort(people.begin(), people.end());
         while(i<=j){
             int weight = people[i] + people[j];
-            if(weight<=limit){ 
-                boats++;
-                i++;
-                j--;
-            }
-            else{
-                j--;
-                boats++;
-            }
-            
+            if(weight<=limit)i++;
+             j--;
+             boats++;
         }
         
         return boats;
