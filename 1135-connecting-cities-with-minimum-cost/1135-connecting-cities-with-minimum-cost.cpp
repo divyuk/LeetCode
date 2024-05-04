@@ -3,14 +3,13 @@ public:
     int minimumCost(int n, vector<vector<int>>& connections) {
         // Create an adjacency list to represent the graph
         vector<vector<pair<int, int>>> adjList(n + 1);
-
         // Fill the adjacency list from the given connections
         for (const auto& conn : connections) {
             int from = conn[0];
             int to = conn[1];
             int weight = conn[2];
             adjList[from].push_back({to, weight});
-            adjList[to].push_back({from, weight});
+            adjList[to].push_back({from, weight}); // Undirected
         }
 
         // Use Prim's Algorithm to find the minimum spanning tree
@@ -34,10 +33,7 @@ public:
                 for (const auto& neighbor : adjList[c]) {
                     int node = neighbor.first;
                     int weight = neighbor.second;
-
-                    if (!visited[node]) {
-                        pq.push({weight, node});
-                    }
+                    if (!visited[node])  pq.push({weight, node});
                 }
             }
         }
