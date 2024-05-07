@@ -17,7 +17,7 @@ public:
             
             if (visited[i][j]) continue;
             if (i == row - 1 && j == col - 1) return dh;
-            visited[i][j] = true;
+            // visited[i][j] = true;
             
             for (auto& p : dir) {
                 int ni = i + p.first;
@@ -25,6 +25,7 @@ public:
                 if (ni >= 0 && ni < row && nj >= 0 && nj < col && !visited[ni][nj]) {
                     int new_dh = max(dh, abs(heights[ni][nj] - heights[i][j]));
                     min_heap.push({new_dh, ni, nj});
+                     visited[i][j] = true;
                 }
             }
         }
