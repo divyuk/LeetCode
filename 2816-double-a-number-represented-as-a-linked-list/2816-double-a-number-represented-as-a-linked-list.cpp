@@ -25,11 +25,13 @@ public:
             dummy = dummy->next;
             temp = temp->next;
         }
-        while (carry > 0) {
-            dummy->next = new ListNode(carry % 10);
-            carry /= 10;
-            dummy = dummy->next;
-        }
+        // while (carry > 0) {
+        //     dummy->next = new ListNode(carry % 10);
+        //     carry /= 10;
+        //     dummy = dummy->next;
+        // }
+        
+        if(carry) dummy->next = new ListNode(carry);
         return reverseList(dummyHead->next);
     }
 };
