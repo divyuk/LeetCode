@@ -14,9 +14,10 @@ class Solution {
     }
 public:
     int maxDistance(vector<int>& position, int m) {
-        int low = 1;
         sort(position.begin(),position.end());
-        int high = position[position.size()-1] - position[0];
+        int n = position.size();
+        int low = 1;
+        int high = position[n-1] - position[0];
         int mid =0;
         int res =0;
         while(low<=high){
