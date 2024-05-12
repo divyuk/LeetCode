@@ -1,8 +1,3 @@
-#include <string>
-#include <set>
-
-using namespace std;
-
 class Solution {
 public:
     string nextClosestTime(string time) {
@@ -11,8 +6,10 @@ public:
         
         // Generate all possible 2 digit values
         // There are at most 16 sorted values here
-        set<char> nums(hour.begin(), hour.end());
-        nums.insert(minute.begin(), minute.end());
+        // set<char> nums(hour.begin(), hour.end());
+        // nums.insert(minute.begin(), minute.end());
+        string nums(hour + minute);
+        sort(nums.begin(), nums.end());
         set<string> two_digit_values;
         for (char a : nums) {
             for (char b : nums) {
