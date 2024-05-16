@@ -12,7 +12,7 @@
 class Solution {
     bool traversal(TreeNode* root){
         
-        if(!root) return false;
+        // if(!root) return false;
         if(!root->left and !root->right) return root->val;
         
         
