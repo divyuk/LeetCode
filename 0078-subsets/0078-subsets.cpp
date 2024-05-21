@@ -5,10 +5,10 @@ private:
             res.push_back(subset);
             return;
         }
-        // decision to include nums[i]
+        // TAKE 
         subset.push_back(nums[i]);
         dfs(nums, i + 1, subset, res);
-        // decision NOT to include nums[i]
+        // NOT TAKE
         subset.pop_back();
         dfs(nums, i + 1, subset, res);
     }
