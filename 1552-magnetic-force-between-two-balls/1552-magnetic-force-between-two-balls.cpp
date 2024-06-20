@@ -16,10 +16,9 @@ public:
     int maxDistance(vector<int>& position, int m) {
         sort(position.begin(),position.end());
         int n = position.size();
-        int low = 1;
+        int low = 1, mid =0, res=0;
         int high = position[n-1] - position[0];
-        int mid =0;
-        int res =0;
+
         while(low<=high){
             mid =  low + (high-low)/2;
             if(isPossible(position, m, mid)){
