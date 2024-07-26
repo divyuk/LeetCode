@@ -1,7 +1,7 @@
 class Solution {
 public:
     int findTheCity(int n, vector<vector<int>>& edges, int distanceThreshold) {
-        // Adjacency list to store the graph
+
         vector<vector<pair<int, int>>> adjacencyList(n);
         // Matrix to store shortest path distances from each city
         vector<vector<int>> shortestPathMatrix(n, vector<int>(n, INT_MAX));
