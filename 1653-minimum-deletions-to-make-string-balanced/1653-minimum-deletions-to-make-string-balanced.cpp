@@ -3,11 +3,10 @@ public:
     int minimumDeletions(string s) {
         int n = s.length();
         int a_count = 0;
-
         // First pass: count the number of 'a's
-        for (int i = 0; i < n; i++) {
+        for (int i = 0; i < n; i++) 
             if (s[i] == 'a') a_count++;
-        }
+        
 
         int b_count = 0;
         int min_deletions = n;
