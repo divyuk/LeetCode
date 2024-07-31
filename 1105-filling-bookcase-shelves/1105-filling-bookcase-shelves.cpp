@@ -1,8 +1,7 @@
 class Solution {
 public:
     int minHeightShelves(vector<vector<int>>& books, int shelfWidth) {
-        // dp[i] will store the minimum height of the bookcase containing all
-        // books up to and excluding i
+
         vector<int> dp(books.size() + 1, 0);
 
         // Base cases
