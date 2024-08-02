@@ -11,34 +11,26 @@ public:
         int totalValCount = 0;
 
         // Count the total number of `val` in the array
-        for (int i = length - 1; i >= 0; i--) {
+        for (int i = length - 1; i >= 0; i--) 
             if (data[i] == val) totalValCount++;
-        }
-
-        // If there is no `val` or the array is full of `val`, no swaps are
-        // needed
+       
         if (totalValCount == 0 || totalValCount == length) return 0;
 
         int start = 0, end = 0;
         int maxValInWindow = 0, currentValInWindow = 0;
 
-        // Initial window setup: count the number of `val` in the first window
-        // of size `totalValCount`
+
         while (end < totalValCount) {
             if (data[end++] == val) currentValInWindow++;
         }
         maxValInWindow = max(maxValInWindow, currentValInWindow);
 
-        // Slide the window across the array to find the maximum number of
-        // `val` in any window
         while (end < length) {
             if (data[start++] == val) currentValInWindow--;
             if (data[end++] == val) currentValInWindow++;
             maxValInWindow = max(maxValInWindow, currentValInWindow);
         }
 
-        // Minimum swaps are the total `val` minus the maximum found in any
-        // window
         return totalValCount - maxValInWindow;
     }
 };
