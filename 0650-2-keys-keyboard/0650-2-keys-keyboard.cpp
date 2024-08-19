@@ -12,3 +12,4 @@ public:
         return press;
     }
 };
+// Sum of prime factors of n
