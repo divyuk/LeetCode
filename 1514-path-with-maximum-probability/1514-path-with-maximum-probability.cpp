@@ -12,7 +12,7 @@ public:
             adj[v].push_back({u,prob});
         }
         
-        typedef pair<double,int>P;
+        typedef pair<double,int>P; // prob, node
         priority_queue<P> pq;
         vector<double>ans(n,0);
         ans[start] = 1;
