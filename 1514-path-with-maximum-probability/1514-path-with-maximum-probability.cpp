@@ -1,8 +1,7 @@
 class Solution {
 public:
     double maxProbability(int n, vector<vector<int>>& edges, vector<double>& succProb, int start,int end){
-       
-        // data into adjList
+
         unordered_map<int, vector<pair<int, double> >> adj;
         for(int i =0; i<edges.size() ; i++){
             int u = edges[i][0];
