@@ -9,9 +9,8 @@ public:
             if (nums[i] == maxEle) {
                 subarrayLen++;
                 ans = max(ans, subarrayLen);
-            } else {
+            } else 
                 subarrayLen = 0;
-            }
         }
         return ans;
     }
