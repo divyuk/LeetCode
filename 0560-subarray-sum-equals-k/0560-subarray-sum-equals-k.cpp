@@ -8,10 +8,12 @@ public:
         for(int i = 0 ; i< nums.size() ; i++){
             sum+=nums[i];
             int s = sum-k;
-            if(pre.find(s)!=pre.end()){
+            if(pre[s])
                 res+=pre[s];
+            // if(pre.find(s)!=pre.end()){
+            //     res+=pre[s];
                // pre.erase(s);
-            }
+            
                 pre[sum]++;
         }
         return res;
