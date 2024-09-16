@@ -1,18 +1,28 @@
+#define ll long long
 class Solution {
 public:
-int subarraysDivByK(vector<int>& nums, int k) {
-    int n = nums.size();
-    vector<int> prefix_sum(n + 1);
-    unordered_map<int, int> map;
-    int count = 0;
-    map[0] = 1;
-    for (int i = 1; i <= n; i++) {
-        prefix_sum[i] = (prefix_sum[i - 1] + nums[i - 1]) % k;
-        if (prefix_sum[i] < 0) {
-            prefix_sum[i] += k;
-        }
-        count += map[prefix_sum[i]];
-        map[prefix_sum[i]]++;
+int subarraysDivByK(vector<int>& arr, int n) {
+    map<ll, int> prefixSumCount;
+    ll sum = 0;
+    ll count = 0;
+
+    // Initialize with 0 sum occurring once
+    prefixSumCount[0] = 1;
+
+    for (int i = 0; i < arr.size(); i++)
+    {
+        // sum += arr[i];
+        cout<<(sum + arr[i]) % n<<"\n";
+        sum = (sum + arr[i]) % n;
+
+        // Since sum can be negative, convert it to positive
+        if (sum < 0)
+            sum += n;
+        
+        count += prefixSumCount[sum];
+       cout<<"c = " << count <<"\n";
+        // Increment count of current sum
+        prefixSumCount[sum]++;
     }
     return count;
 }
