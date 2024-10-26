@@ -19,26 +19,27 @@ public:
     }
     void newHeight(TreeNode* root, int maxi, int level)
     {
-        if(root==NULL)
-        return;
+        if(root==NULL) return;
+        
         res[root->val]= maxi;
         newHeight(root->left, max(maxi, level + rheight[root->val]), level+1);
         newHeight(root->right, max(maxi, level + lheight[root->val]), level+1);
     }
+    
+    
     vector<int> treeQueries(TreeNode* root, vector<int>& queries) {
         int m= queries.size();
-        lheight.clear();
-        rheight.clear();
-        res.clear();
         vector<int> answer(m, 0);
+        
         if(root==NULL) return answer;
+        
         findHeight(root);
         newHeight(root, 0, 0);
-
-        for(int i=0; i<m; i++)
-        {
-            answer[i]=res[queries[i]];
-        }
+        
+        for(auto it : res) cout<<it.first<<"->"<< it.second<<"\n";
+        
+        for(int i=0; i<m; i++) answer[i]=res[queries[i]];
+        
         return answer;
     }
 };
